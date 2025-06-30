@@ -1,0 +1,21 @@
+<% layout("/layouts/boilerplate") %>
+
+<body>
+    <h2 class="index-heading">Property Listings</h2>
+    
+    <div class="listings row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1 g-6">
+        <% listings.forEach( (el) => { %>
+            <a href="/listings/<%= el._id %>" class="listing-link col">
+                <div class="card">
+                    <img src="<%= el.image.url %>" class="card-img-top" alt="<%= el.title %>" loading="lazy">
+                    <div class="card-body">
+                        <h3 class="card-title"><%= el.title %></h3>
+                        <span class="card-text"> &#8377; <%= el.price.toLocaleString("en-IN") %> / night</span>
+                    </div>
+                </div>
+            </a>
+        <% }) %>
+    </div>
+
+</body>
+

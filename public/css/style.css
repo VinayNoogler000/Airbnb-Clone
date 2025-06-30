@@ -1,0 +1,293 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+/* Global Font Style */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+}
+
+/* NavBar Styles */
+.navbar {
+    max-height: 5.5rem;
+    padding: 1rem !important;
+    background-color: #f8f9fa;
+}
+
+@media (max-width: 576px) {
+    .navbar {
+        max-height: fit-content;
+    }
+}
+
+/* NavBar Brand Styling */
+.fa-compass {
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+/* NavLinks Styles */
+.nav-link {
+    color: #222222 !important;
+}
+
+/* Anchor Styles */
+a {
+    text-decoration: none !important;
+    color: inherit;
+}
+
+/* Container Styles */
+.main-container {
+    width: 100%;
+    flex: 1;
+    align-self: center;
+    padding: 1rem 2rem !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Heading Styles */
+h1, h2 {
+    margin-bottom: 1.5rem !important;
+    text-align: center;
+}
+
+/* Listings Styles */
+.listing-link {
+    transition: transform 0.3s ease-in-out;
+}
+
+.listing-link:hover {
+    transform: scale(1.02);
+}
+
+/* Listing Card Styles */
+.listings .card {
+    min-width: 100%;
+    min-height: 100%;
+    border: none !important;
+    margin-bottom: 2rem !important;
+}
+
+.card-img-top {
+    height: 20rem !important;
+    border-radius: 1rem !important;
+    object-fit: cover !important;
+}
+
+.card-body {
+    margin-top: 0.5rem;
+    padding: 0 !important;
+}
+
+/* Listing Form Styles */
+@media (max-width: 768px) {
+    .listing-form {
+        width: 32.5rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .listing-form {
+        width: 100% !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .listing-form {
+        width: 40rem !important;
+    }
+}
+
+.listing-form-btn {
+    border: 0 !important;
+    background-color: #fe424d !important;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.listing-form-btn:hover {
+    background-color: #e33a45 !important;
+}
+
+/* Show-Page Styles */
+.show-page .listing-card {
+    min-width: 350px !important;
+    border: 0 !important;
+    padding-bottom: 1.5rem !important;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    background-color: #ebebeb;
+}
+
+@media (max-width: 500px) {
+    .show-page .listing-card {
+        min-width: 100% !important;
+    }
+
+    .show-page .listing-card-text {
+        margin-bottom: 0.5rem !important;
+    }
+}
+
+.show-page .listing-card .card-body {
+    padding: 0 0.25rem !important;
+}
+
+.show-page .listing-card .card-title {
+    font-size: 1.5rem !important;
+    font-weight: 600;
+    margin-bottom: 0.5rem !important;
+}
+
+.show-page img {
+    height: 30vh !important;
+    object-fit: cover;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
+
+.show-page .listing-card ~ .links {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.show-page .btn {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Responsive Styling for Horizontal-Rule Element */
+@media (max-width: 768px) {
+    hr {
+        width: 90% !important;
+    }
+}
+
+/* Review Form Styles in the Show Page */
+.review-form {
+    min-width: 270px;
+    max-width: 315px;
+    padding: 1rem 0.5rem;
+    border-radius: 1rem;
+    background-color: #ebebeb;
+}
+
+.form-range::-webkit-slider-runnable-track {
+    background-color: #fe424d !important;
+}
+
+.form-range::-webkit-slider-thumb {
+    background-color: black !important;
+}
+
+/* Reviews Styles */
+.reviews {
+    width: fit-content;
+    max-width: 950px;
+}
+
+.review-card {
+    min-width: 18.5rem !important;
+    max-width: 18.51rem !important;
+    border-radius: 1rem !important;
+    position: relative;
+}
+
+.review-card .card-title {
+    font-size: 1rem !important;
+    font-weight: 500;
+    margin-top: none !important;
+    margin-bottom: 0.25rem !important;
+}
+
+.review-card .star {
+    color: #ffa41c;
+    font-size: 1.15rem !important;
+}
+
+.review-card .card-subtitle {
+    font-size: 0.875rem !important;
+    color: #6c757d !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.review-card .card-text {
+    font-size: 1rem !important;
+    font-weight: 500;
+}
+
+.review-delete-form {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+}
+
+abbr {
+    text-decoration: none !important;
+    cursor: pointer !important;
+}
+
+.review-delete-form button {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.review-delete-form .fa-trash {
+    font-size: 0.75rem;
+}
+
+/* Footer Styles */
+.f-info {
+    width: 100%;
+    height: fit-content;
+    margin: 2rem auto;
+    margin-bottom: 0;
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background-color: #ebebeb;
+}
+
+.f-info .socials {
+    font-size: 1.25rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.f-info .socials i{
+    cursor: pointer;
+}
+
+.f-info .socials, .f-info .links {
+    width: 100%;
+    text-align: center;
+}
+
+.f-info .copyright {
+    margin: 0;
+}
+
+.f-info .links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.f-info .links a:hover {
+    text-decoration: underline !important;
+}

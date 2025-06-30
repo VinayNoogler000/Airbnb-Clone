@@ -1,0 +1,72 @@
+<% layout("/layouts/boilerplate") %>
+
+<body class="show-page">
+    <h2><%= listing.title %></h2>
+
+    <div class="listing-card col-6">
+        <img src="<%= listing.image.url %> " class="card-img-top" alt="<%= listing.title %>" loading="eager">
+        <div class="card-body">
+            <p class="card-text"><%= listing.description %></p>
+            <p class="card-text"><b>Price:</b> &#8377;<%= listing.price.toLocaleString("en-IN") %> </p>
+            <p class="card-text"><b>Location:</b> <%= listing.location %></p>
+            <p class="card-text"><b>Country:</b> <%= listing.country %></p>
+        </div>
+    </div>
+
+    <div class="links">
+        <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning" role="button"><i class="fa-solid fa-pencil"></i> &nbsp;  Edit</a>
+
+        <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" class="delete-form">
+            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i> &nbsp;  Delete</button>
+        </form>
+    </div>
+
+    <hr class="col-6 mt-4"/>
+
+    <!-- Add Review Form -->
+    <form method="POST" action="/listings/<%= listing._id %>/reviews" class="review-form mt-2 col-4 d-flex flex-column align-items-stretch needs-validation" novalidate>
+        <h4 class="align-self-center mb-0">Add a Review</h4>
+
+        <div class="mt-2">
+            <label for="rating" class="form-label mb-0">Rating:</label>
+            <input type="range" name="review[rating]" id="rating" class="form-range" min="1" max="5" step="0.5" required>
+        </div>
+
+        <div class="mt-2">
+            <label for="comment" class="form-label mb-1">Comment:</label>
+            <textarea name="review[comment]" id="comment" class="form-control" rows="2" placeholder="Write your review here..." required></textarea>
+            <div class="valid-feedback">Looks Good!</div>
+            <div class="invalid-feedback">Please provide a comment.</div>
+        </div>
+
+        <button type="submit" class="btn btn-outline-success mt-3 align-self-center"><i class="fa-solid fa-check"></i> &nbsp; Submit</button>
+    </form>
+
+    <hr class="col-6 mt-4"/>
+
+    <div class="reviews d-flex flex-column align-items-center">
+        <% if (listing.reviews.length > 0) { %>
+            <!-- Show All Reviews of this Property Listing -->
+            <h3 class="mt-2 mb-3">Reviews</h3>
+
+            <div class="row gap-3 justify-content-center">
+                <% listing.reviews.forEach((review) => { %>
+                    <div class="card review-card py-2 col">
+                        <div class="card-body">
+                            <h5 class="card-title"> John Doe &nbsp; <%= review.rating %> <span class="star">★</span></h5>
+                            <h6 class="card-subtitle"> Reviewed on &nbsp;<%= review.createdAt.toLocaleDateString("en-IN", { year: "numeric", month: "long" }) %> </h6>
+                            <p class="card-text"> <%= review.comment %> </p>
+                        </div>
+
+                        <form method="post" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" class="review-delete-form">
+                            <abbr title="Delete Review"> <button type="submit" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></button> </abbr>
+                        </form>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+        <h3>No Reviews Yet</h3>
+        <p>Be the first to review this listing!</p>
+        <% } %>
+    </div>
+</body>
