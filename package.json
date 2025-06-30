@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon index.js"
   },
-  "keywords": ["html", "css", "javascript", "node.js", "express", "ejs", "ejs-mate", "mongoose", "mongodb", "airbnb", "clone", "property-listings", "webapp"],
+  "keywords": ["html", "css", "javascript", "node.js", "express", "ejs", "ejs-mate", "method-override", "joi", "mongoose", "mongodb", "airbnb", "clone", "property-listings", "webapp"],
   "author": "Vinay Tambey",
   "license": "ISC",
   "type": "commonjs",
