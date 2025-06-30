@@ -1,12 +1,12 @@
 {
-  "name": "full-stack-projects",
-  "version": "1.0.0",
+  "name": "Airbnb-Clone",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
   },
-  "keywords": [],
+  "keywords": ["html", "css", "javascript", "node.js", "express", "ejs", "ejs-mate", "mongoose", "mongodb", "airbnb", "clone", "property-listings", "webapp"],
   "author": "Vinay Tambey",
   "license": "ISC",
   "type": "commonjs",
