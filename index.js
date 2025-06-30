@@ -60,7 +60,7 @@ app.set("views", path.join(__dirname, "/views/"));
 
 // Define Route Handlers or APIs:
 app.get('/', (req, res) => {
-    res.send("Hi, I'm Root!");
+    res.redirect("/listings");
 });
 
 // define a Route to Add a new Test Listing:
@@ -193,7 +193,7 @@ app.delete("/listings/:id/reviews/:reviewId", wrapAsync( async (req, res) => {
 }));
 
 // define a Route-Handler which handles the Client's Requests to All other Undefined Routes:
-app.all("/:random", (req, res) => {
+app.use((req, res) => {
     throw new ExpressError(404, "Page Not Found!");
 });
 
