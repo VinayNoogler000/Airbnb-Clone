@@ -2,28 +2,9 @@ const express = require("express");
 const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
 const Listing = require("../models/listing");
-const Review = require("../models/review");
-const { listingSchema, reviewSchema } = require("../schema");
+const { listingSchema } = require("../schema");
+const validateModel = require("../utils/validateModel");
 const router = express.Router();
-
-// define a Middleware func() to Validate Listing Data, sent by the client:
-const validateModel = (req, res, next) => {
-    let error;
-    if (req.path === "/listings") { // "listingSchema"
-        error = listingSchema.validate(req.body).error;
-    } 
-    else if (req.path.endsWith("/reviews")) { // "reviewSchema"
-        error = reviewSchema.validate(req.body).error;
-    }
-
-    if(error) {
-        let errMsg = error.details.map((err) => err.message).join(',');
-        throw new ExpressError(400, errMsg);
-    }
-    else {
-        next();
-    }
-}
 
 // define a Route to Add a new Test Listing:
 router.get("/sample", wrapAsync (async (req, res) => {
@@ -118,40 +99,6 @@ router.delete("/:id", wrapAsync( async (req, res) => {
 
     console.log(`Listing with ID ${id} deleted successfully`);
     res.redirect("/listings");
-}));
-
-// define a Route to Add a Review to a Property Listing:
-router.post("/:id/reviews", validateModel, wrapAsync( async(req, res) => {
-    // Create a new review instance
-    const newReview = new Review({
-        ...req.body.review,
-    });
-
-    // Find the listing by ID and push the new review into its reviews array
-    const listing = await Listing.findById(req.params.id);
-
-    if (!listing) {
-        throw new ExpressError(404, "Listing Not Found!");
-    }
-    listing.reviews.push(newReview._id);
-
-    // Save the updated listing & the new review
-    await newReview.save();
-    await listing.save();
-
-    // Redirect to the listing's detail page
-    res.redirect(`/listings/${listing._id}`);
-}));
-
-// define a Route to Delete a Review from a Property Listing:
-router.delete("/:id/reviews/:reviewId", wrapAsync( async (req, res) => {
-    const { id: listingId, reviewId } = req.params;
-    
-    await Listing.findByIdAndUpdate(listingId, { $pull: {reviews: reviewId} });
-    await Review.findByIdAndDelete(reviewId);
-
-    console.log(`Review with ID ${reviewId} deleted successfully from listing ${listingId}`);
-    res.redirect(`/listings/${listingId}`);
 }));
 
 module.exports = router;

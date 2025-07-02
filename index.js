@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
 const listingsRouter = require("./routes/listing.js");
+const reviewsRouter = require("./routes/review.js");
 
 // Create EXPRESS APP:
 const app = express();
@@ -41,6 +42,7 @@ app.get('/', (req, res) => {
 });
 
 app.use("/listings", listingsRouter);
+app.use("/listings/:id/reviews", reviewsRouter);
 
 // A Route-Handler to Handle the Client's Requests to ALL UNDEFINED ROUTES:
 app.use((req, res) => {
