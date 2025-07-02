@@ -2,7 +2,6 @@ const express = require("express");
 const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
 const Listing = require("../models/listing");
-const { listingSchema } = require("../schema");
 const validateModel = require("../utils/validateModel");
 const router = express.Router();
 
