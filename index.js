@@ -12,6 +12,10 @@ const { listingSchema, reviewSchema } = require("./schema");
 const Review = require("./models/review");
 const review = require("./models/review");
 
+// Create Express App:
+const app = express();
+const PORT = process.env.PORT;
+
 // define Main() to Connect with MongoDB:
 const main = async () => {
     await mongoose.connect("mongodb://127.0.0.1:27017/wonderlust");
@@ -40,10 +44,6 @@ const validateModel = (req, res, next) => {
 main()
     .then(() => console.log("Successfully Connected to MongoDB"))
     .catch((err) => console.error("Error connecting to MongoDB:", err));
-
-// Create Express App:
-const app = express();
-const PORT = process.env.PORT;
 
 // make the Data Readable to Express app, which is Embedded in Client's Request:
 app.use(methodOverride("_method"));
