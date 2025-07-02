@@ -107,7 +107,7 @@ router.put("/:id", validateModel, wrapAsync( async (req, res) => {
         }
     };
 
-    await Listing.findByIdAndUpdate(id, updatedListing);
+    await Listing.findByIdAndUpdate(id, updatedListing, {runValidators: true});
     res.redirect(`/listings/${id}`);
 }));
 
