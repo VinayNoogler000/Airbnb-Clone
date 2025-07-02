@@ -8,7 +8,7 @@ const validateModel = require("../utils/validateModel");
 const router = express.Router();
 
 // define a Route to Add a Review to a Property Listing:
-router.post("/:id/reviews", validateModel, wrapAsync( async(req, res) => {
+router.post('/', validateModel, wrapAsync( async(req, res) => {
     // Create a new review instance
     const newReview = new Review({
         ...req.body.review,
@@ -31,7 +31,7 @@ router.post("/:id/reviews", validateModel, wrapAsync( async(req, res) => {
 }));
 
 // define a Route to Delete a Review from a Property Listing:
-router.delete("/:id/reviews/:reviewId", wrapAsync( async (req, res) => {
+router.delete("/:reviewId", wrapAsync( async (req, res) => {
     const { id: listingId, reviewId } = req.params;
     
     await Listing.findByIdAndUpdate(listingId, { $pull: {reviews: reviewId} });
