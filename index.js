@@ -9,6 +9,7 @@ const ExpressError = require("./utils/ExpressError");
 const listingsRouter = require("./routes/listing.js");
 const reviewsRouter = require("./routes/review.js");
 const session = require("express-session");
+const flash = require("connect-flash");
 
 // Create EXPRESS APP:
 const app = express();
@@ -44,13 +45,20 @@ app.use(express.json());
 // define the Path from where STATIC FILES will be Served:
 app.use(express.static(path.join(__dirname, "/public")));
 
-// pass the SESSION object in the MIDDLEWARE with SESSION's OPTIONS:
-app.use( session(sessionOptions) );
-
 // set the TEMPLATE ENGINE, with its Path:
 app.set("view engine", "ejs");
 app.engine("ejs", ejsMate);
 app.set("views", path.join(__dirname, "/views"));
+
+// ************************* MIDDLEWAREs ********************************:
+app.use( session(sessionOptions) );
+app.use( flash() );
+
+app.use( (req, res, next) => {
+    res.locals.success = req.flash("success");
+    res.locals.error =  req.flash("error");
+    next();
+});
 
 // *********************** Route Handlers/APIs ****************************:
 app.get('/', (req, res) => {
