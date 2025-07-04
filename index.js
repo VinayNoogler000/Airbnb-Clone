@@ -8,10 +8,23 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
 const listingsRouter = require("./routes/listing.js");
 const reviewsRouter = require("./routes/review.js");
+const session = require("express-session");
 
 // Create EXPRESS APP:
 const app = express();
 const PORT = process.env.PORT;
+
+// define SESSION's OPTIONS wiht COOKIES:
+const sessionOptions = {
+    secret: "my-super-secret-code",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        expires: Date.now() + (1000 * 60 * 60 * 24 * 7), // the cookie will expire 7 days after geting saved on the browser
+        maxAge: 1000 * 60 * 60 * 24 * 7,
+        httpOnly: true
+    }
+}
 
 // ASYNC FUNCTION to CONNECT with MongoDB:
 const main = async () => {
@@ -23,13 +36,16 @@ main()
     .then(() => console.log("Successfully Connected to MongoDB"))
     .catch((err) => console.error("Error connecting to MongoDB:", err));
 
-// PARSE THE DATA EMBEDDED IN REQ'S BODY, and MODIFY THE HTTP-METHOD:
+// MODIFY THE HTTP-REQUEST-METHOD & PARSE THE DATA EMBEDDED IN REQ'S BODY:
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // define the Path from where STATIC FILES will be Served:
 app.use(express.static(path.join(__dirname, "/public")));
+
+// pass the SESSION object in the MIDDLEWARE with SESSION's OPTIONS:
+app.use( session(sessionOptions) );
 
 // set the TEMPLATE ENGINE, with its Path:
 app.set("view engine", "ejs");
