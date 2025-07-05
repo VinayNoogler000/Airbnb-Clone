@@ -59,7 +59,8 @@ router.get("/:id", wrapAsync( async (req, res, next) => {
     const listing = await Listing.findById(id).populate("reviews", "_id rating comment createdAt");
 
     if (!listing) {
-        throw new ExpressError(404, "Listing Doesn't Exists!");
+        req.flash("error", "Listing which you want to view Doesn't Exists!");
+        return res.redirect("/listings");
     }
 
     res.render("listings/show.ejs", { listing });
@@ -72,7 +73,8 @@ router.get("/:id/edit", wrapAsync( async (req, res) => {
     const listing = await Listing.findById(id);
 
     if (!listing) {
-        return res.status(404).send("Listing not found");
+        req.flash("error", "Listing which you want to edit Doesn't Exists!");
+        return res.redirect("/listings");
     }
 
     res.render("listings/edit.ejs", { listing });

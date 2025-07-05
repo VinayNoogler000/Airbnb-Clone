@@ -1,6 +1,11 @@
-<% if(success.length > 0) { %>
+<% if( alerts.success.length > 0) { %>
     <div class="alert alert-success alert-dismissible fade show fs-6" role="alert"> 
-        <strong> <%= success %></strong>
+        <strong> <%= alerts.success %></strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-<% } %> 
+<% } else if (alerts.error.length > 0) { %>
+    <div class="alert alert-danger alert-dismissible fade show fs-6" role="alert"> 
+        <strong> <%= alerts.error %></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>
