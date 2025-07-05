@@ -12,14 +12,18 @@
     <script src="/js/script.js" defer></script>
 </head>
 <body>
-    <%- include("../includes/navbar.ejs") %>
+    <header>
+        <%- include("../includes/navbar.ejs") %>
+    </header>
 
-    <div class="main-container"> 
+    <main> 
         <%- include("../includes/flash.ejs") %>
         <%- body %> 
-    </div>
+    </main>
 
-    <%- include("../includes/footer") %>
+    <footer>
+        <%- include("../includes/footer") %>
+    </footer>
 
 </body>
 </html>
