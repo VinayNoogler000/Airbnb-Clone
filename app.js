@@ -6,12 +6,14 @@ const path = require("path");
 const mongoose = require("mongoose");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
-const listingsRouter = require("./routes/listing.js");
-const reviewsRouter = require("./routes/review.js");
 const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
+
+// Required Models and Routers:
+const listingsRouter = require("./routes/listing.js");
+const reviewsRouter = require("./routes/review.js");
 const User = require("./models/user.js");
 const usersRouter = require("./routes/user.js");
 
