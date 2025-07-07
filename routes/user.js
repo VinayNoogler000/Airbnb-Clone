@@ -12,4 +12,8 @@ router.get("/demo", wrapAsync( async (req, res) => {
     res.send(registeredUser);
 }));
 
+router.get("/signup", (req, res) => {
+    res.render("users/signup.ejs");
+});
+
 module.exports = router;
