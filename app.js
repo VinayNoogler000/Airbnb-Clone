@@ -56,7 +56,8 @@ app.set("view engine", "ejs");
 app.engine("ejs", ejsMate);
 app.set("views", path.join(__dirname, "/views"));
 
-// ************************* MIDDLEWAREs ********************************:
+
+// ************************* MIDDLEWARES ********************************:
 app.use( session(sessionOptions) );
 app.use( flash() );
 
@@ -75,7 +76,8 @@ app.use( (req, res, next) => {
     next();
 });
 
-// *********************** Route Handlers/APIs ****************************:
+
+// *********************** ROUTE HANDLERS OR APIS ****************************:
 app.get('/', (req, res) => {
     res.redirect("/listings");
 });
