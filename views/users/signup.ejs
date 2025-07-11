@@ -2,4 +2,32 @@
 
 <body>
     <h1>Sign-Up</h1>
+
+    <form method="POST" action="/signup" class="user-form col-12 needs-validation" novalidate>
+        <div class="mb-3 mb-sm-4">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" id="name" class="form-control" name="user[name]" placeholder="Enter your name" required>
+            <div class="valid-feedback">Looks Good!</div>
+            <div class="invalid-feedback">Please enter a valid username/id.</div>
+        </div>
+
+        <div class="mb-3 mb-sm-4">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" id="email" class="form-control" name="user[email]" placeholder="Enter your email" required />
+            <div class="valid-feedback">Looks Good!</div>
+            <div class="invalid-feedback">Please enter a valid email address.</div>
+        </div>
+        
+        <div class="mb-3 mb-sm-4">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" id="password" class="form-control" name="user[password]" placeholder="Enter your password" required>
+            <div class="valid-feedback">Looks Good!</div>
+            <div class="invalid-feedback">Please enter a valid password.</div>
+        </div>
+
+        <div class="row justify-content-center text-center">
+            <button type="submit" class="col-3 btn btn-primary user-form-btn">Create</button>
+        </div>
+
+    </form>
 </body>

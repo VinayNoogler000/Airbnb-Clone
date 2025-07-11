@@ -95,30 +95,30 @@ h1, h2 {
 
 /* Listing Form Styles */
 @media (max-width: 768px) {
-    .listing-form {
+    .listing-form, .user-form {
         width: 32.5rem !important;
     }
 }
 
 @media (max-width: 576px) {
-    .listing-form {
+    .listing-form, .user-form {
         width: 100% !important;
     }
 }
 
 @media (min-width: 768px) {
-    .listing-form {
+    .listing-form, .user-form {
         width: 40rem !important;
     }
 }
 
-.listing-form-btn {
+.listing-form-btn, .user-form-btn {
     border: 0 !important;
     background-color: #fe424d !important;
     transition: background-color 0.3s ease-in-out;
 }
 
-.listing-form-btn:hover {
+.listing-form-btn:hover,  .user-form-btn:hover {
     background-color: #e33a45 !important;
 }
 
