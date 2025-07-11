@@ -84,7 +84,7 @@ app.get('/', (req, res) => {
 
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
-app.use("/users", usersRouter);
+app.use("/", usersRouter);
 
 // A Route-Handler to Handle the Client's Requests to ALL UNDEFINED ROUTES:
 app.use((req, res) => {
