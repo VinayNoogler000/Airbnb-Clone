@@ -19,9 +19,11 @@ reviewSchema = Joi.object({
 });
 
 userSchema = Joi.object({
-    username: Joi.string().required(),
-    email: Joi.string().email().required(),
-    password: Joi.string().required()
-}).required(true);
+    user: Joi.object({
+        name: Joi.string().required(),
+        email: Joi.string().email().required(),
+        password: Joi.string().required()
+    }).required()
+})
 
 module.exports = { listingSchema, reviewSchema, userSchema };
