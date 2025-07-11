@@ -1,7 +1,7 @@
 const express = require("express");
 const wrapAsync = require("../utils/wrapAsync");
-const ExpressError = require("../utils/ExpressError");
 const Listing = require("../models/listing");
+const { listingSchema } = require("../schema.js");
 const validateModel = require("../utils/validateModel");
 const router = express.Router();
 
@@ -34,7 +34,7 @@ router.get("/sample", wrapAsync (async (req, res) => {
 }));
 
 // define a Route to Handle the Form Submission for Creating a New Property Listing:
-router.post("/", validateModel, wrapAsync( async (req, res) => {
+router.post("/", validateModel(listingSchema), wrapAsync( async (req, res) => {
 
     // create a new property listing object:
     const newListing = new Listing({
@@ -81,7 +81,7 @@ router.get("/:id/edit", wrapAsync( async (req, res) => {
 }));
 
 // define a Route to Handle the Form Submission for Updating a Property Listing:
-router.put("/:id", validateModel, wrapAsync( async (req, res) => {
+router.put("/:id", validateModel(listingSchema), wrapAsync( async (req, res) => {
     const { id } = req.params;
     const updatedListing = {
         ...req.body.listing,

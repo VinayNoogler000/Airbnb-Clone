@@ -3,11 +3,12 @@ const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
 const Listing = require("../models/listing");
 const Review = require("../models/review");
+const { reviewSchema } = require("../schema.js");
 const validateModel = require("../utils/validateModel");
 const router = express.Router({ mergeParams: true});
 
 // define a Route to Add a Review to a Property Listing:
-router.post("/", validateModel, wrapAsync( async(req, res) => {
+router.post("/", validateModel(reviewSchema), wrapAsync( async(req, res) => {
     // Create a new review instance
     const newReview = new Review({
         ...req.body.review,

@@ -1,20 +1,15 @@
-// define a Middleware func() to Validate Listing Data, sent by the client:
-const validateModel = (req, res, next) => {
-    let error;
-    if (req.path === "/listings") { // "listingSchema"
-        error = listingSchema.validate(req.body).error;
-    } 
-    else if (req.path.endsWith("/reviews")) { // "reviewSchema"
-        error = reviewSchema.validate(req.body).error;
-    }
+const ExpressError = require("../utils/ExpressError.js");
 
-    if(error) {
-        let errMsg = error.details.map((err) => err.message).join(',');
+// define a Middleware factory func() to Validate Model Data, sent by the client:
+const validateModel = (schema) => (req, res, next) => {
+    const { error } = schema.validate(req.body);
+    
+    if (error) {
+        const errMsg = error.details.map((err) => err.message).join(',');
         throw new ExpressError(400, errMsg);
+    } else {
+        return next();
     }
-    else {
-        next();
-    }
-}
+};
 
 module.exports = validateModel;
