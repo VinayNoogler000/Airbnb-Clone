@@ -1,8 +1,9 @@
 const express = require("express");
-const wrapAsync = require("../utils/wrapAsync");
 const Listing = require("../models/listing");
 const { listingSchema } = require("../schema.js");
 const validateModel = require("../utils/validateModel");
+const { isLoggedIn } = require("../utils/isLoggedIn.js");
+const wrapAsync = require("../utils/wrapAsync");
 const router = express.Router();
 
 // define a Route to Server All Listings to the client:
@@ -12,11 +13,11 @@ router.get("/", wrapAsync( async (req, res) => {
 }));
 
 // define a Route to Serve a Form to Create a New Property Listing:
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
     res.render("listings/new.ejs");
 });
 
-// define a Route to Add a new Test Listing:
+// define a Route to Add a new Sample Listing:
 router.get("/sample", wrapAsync (async (req, res) => {
     // create a demo document in the Listing collection:
     const demoListing = new Listing({
@@ -68,7 +69,7 @@ router.get("/:id", wrapAsync( async (req, res, next) => {
 
 
 // define a Route to Render a Form to Edit a Property Listing:
-router.get("/:id/edit", wrapAsync( async (req, res) => {
+router.get("/:id/edit", isLoggedIn, wrapAsync( async (req, res) => {
     const { id } = req.params;
     const listing = await Listing.findById(id);
 
@@ -98,7 +99,7 @@ router.put("/:id", validateModel(listingSchema), wrapAsync( async (req, res) => 
 }));
 
 // define a Route to Handle the Deletion of a Property Listing:
-router.delete("/:id", wrapAsync( async (req, res) => {
+router.delete("/:id", isLoggedIn, wrapAsync( async (req, res) => {
     const { id } = req.params;
     await Listing.findByIdAndDelete(id);
 
