@@ -20,6 +20,7 @@ reviewSchema = Joi.object({
 
 userSchema = Joi.object({
     username: Joi.string().required(),
+    email: Joi.string(),
     password: Joi.string().required()
 })
 
