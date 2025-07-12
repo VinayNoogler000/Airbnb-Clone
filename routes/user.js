@@ -46,7 +46,7 @@ router.post("/login", validateModel(userSchema),
         failureFlash: true
     }), 
     (req, res) => {
-        req.flash("success", `Welcome Back, ${req.body.username}!`);
+        req.flash("success", `Welcome Back, @${req.body.username}!`);
         res.redirect("/listings");
     }
 );
