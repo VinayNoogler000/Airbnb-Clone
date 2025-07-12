@@ -1,8 +1,8 @@
 const express = require("express");
 const Listing = require("../models/listing");
 const { listingSchema } = require("../schema.js");
-const validateModel = require("../utils/validateModel");
 const { isLoggedIn } = require("../utils/isLoggedIn.js");
+const validateModel = require("../utils/validateModel");
 const wrapAsync = require("../utils/wrapAsync");
 const router = express.Router();
 
@@ -12,12 +12,12 @@ router.get("/", wrapAsync( async (req, res) => {
     res.render("listings/index.ejs", { listings });
 }));
 
-// define a Route to Serve a Form to Create a New Property Listing:
+// define a Route to Serve a FORM to Create a NEW PROPERTY LISTING:
 router.get("/new", isLoggedIn, (req, res) => {
     res.render("listings/new.ejs");
 });
 
-// define a Route to Add a new Sample Listing:
+// define a Route to ADD a NEW SAMPLE LISTING:
 router.get("/sample", wrapAsync (async (req, res) => {
     // create a demo document in the Listing collection:
     const demoListing = new Listing({
@@ -35,7 +35,7 @@ router.get("/sample", wrapAsync (async (req, res) => {
 }));
 
 // define a Route to Handle the Form Submission for Creating a New Property Listing:
-router.post("/", validateModel(listingSchema), wrapAsync( async (req, res) => {
+router.post("/", isLoggedIn, validateModel(listingSchema), wrapAsync( async (req, res) => {
 
     // create a new property listing object:
     const newListing = new Listing({
@@ -54,7 +54,7 @@ router.post("/", validateModel(listingSchema), wrapAsync( async (req, res) => {
     res.redirect("/listings");
 }));
 
-// define a Route to View the Property in detail:
+// define a Route to VIEW the PROPERTY LISTING IN DETAIL:
 router.get("/:id", wrapAsync( async (req, res, next) => {
     const { id } = req.params;
     const listing = await Listing.findById(id).populate("reviews", "_id rating comment createdAt");
@@ -68,7 +68,7 @@ router.get("/:id", wrapAsync( async (req, res, next) => {
 }));
 
 
-// define a Route to Render a Form to Edit a Property Listing:
+// define a Route to Render a Form to EDIT a PROPERTY LISTING:
 router.get("/:id/edit", isLoggedIn, wrapAsync( async (req, res) => {
     const { id } = req.params;
     const listing = await Listing.findById(id);
@@ -81,8 +81,8 @@ router.get("/:id/edit", isLoggedIn, wrapAsync( async (req, res) => {
     res.render("listings/edit.ejs", { listing });
 }));
 
-// define a Route to Handle the Form Submission for Updating a Property Listing:
-router.put("/:id", validateModel(listingSchema), wrapAsync( async (req, res) => {
+// define a Route to Handle the Form Submission for UPDATING a PROPERTY LISTING:
+router.put("/:id", isLoggedIn, validateModel(listingSchema), wrapAsync( async (req, res) => {
     const { id } = req.params;
     const updatedListing = {
         ...req.body.listing,
@@ -98,7 +98,7 @@ router.put("/:id", validateModel(listingSchema), wrapAsync( async (req, res) => 
     res.redirect(`/listings/${id}`);
 }));
 
-// define a Route to Handle the Deletion of a Property Listing:
+// define a Route to Handle the DELETION of a PROPERTY LISTING:
 router.delete("/:id", isLoggedIn, wrapAsync( async (req, res) => {
     const { id } = req.params;
     await Listing.findByIdAndDelete(id);

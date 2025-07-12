@@ -1,14 +1,15 @@
 const express = require("express");
-const wrapAsync = require("../utils/wrapAsync");
-const ExpressError = require("../utils/ExpressError");
 const Listing = require("../models/listing");
 const Review = require("../models/review");
 const { reviewSchema } = require("../schema.js");
+const { isLoggedIn } = require("../utils/isLoggedIn.js");
 const validateModel = require("../utils/validateModel");
+const wrapAsync = require("../utils/wrapAsync");
+const ExpressError = require("../utils/ExpressError");
 const router = express.Router({ mergeParams: true});
 
 // define a Route to Add a Review to a Property Listing:
-router.post("/", validateModel(reviewSchema), wrapAsync( async(req, res) => {
+router.post("/", isLoggedIn, validateModel(reviewSchema), wrapAsync( async(req, res) => {
     // Create a new review instance
     const newReview = new Review({
         ...req.body.review,
@@ -33,7 +34,7 @@ router.post("/", validateModel(reviewSchema), wrapAsync( async(req, res) => {
 }));
 
 // define a Route to Delete a Review from a Property Listing:
-router.delete("/:reviewId", wrapAsync( async (req, res) => {
+router.delete("/:reviewId", isLoggedIn, wrapAsync( async (req, res) => {
     const { id: listingId, reviewId } = req.params;
     
     await Listing.findByIdAndUpdate(listingId, { $pull: {reviews: reviewId} });
