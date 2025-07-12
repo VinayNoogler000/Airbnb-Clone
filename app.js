@@ -73,6 +73,7 @@ passport.deserializeUser(User.deserializeUser()); //remove the user's informatio
 
 app.use( (req, res, next) => {
     res.locals.alerts = { success: req.flash("success"), error: req.flash("error") };
+    res.locals.user = req.user;
     next();
 });
 
