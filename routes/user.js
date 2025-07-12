@@ -21,14 +21,19 @@ router.get("/signup", (req, res) => {
 
 router.post("/signup", validateModel(userSchema), async (req, res) => {
     try {
-        const {user} = req.body;
-        const newUser = new User({username: user.name, email: user.email});
+        const {username, email, password} = req.body;
+        const newUser = new User({username, email});
         
-        const registeredUser = await User.register(newUser, user.password);
-        
+        const registeredUser = await User.register(newUser, password);
         console.log(registeredUser);
-        req.flash("success", `Welcome to Wonderlust, ${user.name}!`);
-        res.redirect("/listings");
+
+        req.login(registeredUser, (err) => {
+            if(err) {
+                return next(err);
+            }
+            req.flash("success", `Welcome to Wonderlust, @${username}!`);
+            res.redirect("/listings");
+        });
     }
     catch (err) {
         console.log(err.message);
