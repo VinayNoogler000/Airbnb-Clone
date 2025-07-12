@@ -2,7 +2,7 @@ const router = require("express").Router();
 const validateModel = require("../utils/validateModel.js");
 const { userSchema } = require("../schema.js");
 const User = require("../models/user.js");
-const wrapAsync = require("../utils/wrapAsync.js");
+const passport = require("passport");
 
 // router.get("/demo", wrapAsync( async (req, res) => {
 //     const newUser = new User ({
@@ -39,5 +39,16 @@ router.post("/signup", validateModel(userSchema), async (req, res) => {
 router.get("/login", (req, res) => {
     res.render("users/login.ejs");
 });
+
+router.post("/login", validateModel(userSchema), 
+    passport.authenticate("local", {
+        failureRedirect: "/login", 
+        failureFlash: true
+    }), 
+    (req, res) => {
+        req.flash("success", `Welcome Back, ${req.body.username}!`);
+        res.redirect("/listings");
+    }
+);
 
 module.exports = router;
