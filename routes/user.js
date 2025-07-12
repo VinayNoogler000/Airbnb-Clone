@@ -3,6 +3,7 @@ const validateModel = require("../utils/validateModel.js");
 const { userSchema } = require("../schema.js");
 const User = require("../models/user.js");
 const passport = require("passport");
+const { isLoggedIn } = require("../utils/isLoggedIn.js");
 
 // router.get("/demo", wrapAsync( async (req, res) => {
 //     const newUser = new User ({
@@ -50,5 +51,15 @@ router.post("/login", validateModel(userSchema),
         res.redirect("/listings");
     }
 );
+
+router.get("/logout", isLoggedIn, (req, res, next) => {
+    req.logout((err) => {
+        if(err) next(err);
+        else {
+            req.flash("success", "Logged Out Successfully!");
+            res.redirect("/listings");
+        }
+    });
+});
 
 module.exports = router;
