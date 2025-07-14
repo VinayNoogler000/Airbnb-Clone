@@ -1,4 +1,4 @@
-const sampleListings = [
+module.exports.listings = [
   {
     title: "Cozy Beachfront Cottage",
     description:
@@ -348,5 +348,3 @@ const sampleListings = [
     country: "Costa Rica",
   },
 ];
-
-module.exports = { data: sampleListings };

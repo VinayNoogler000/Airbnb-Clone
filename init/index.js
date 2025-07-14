@@ -13,15 +13,17 @@ main()
 
 const initDB = async () => {
     await Listing.deleteMany({});
-    await Listing.insertMany(initData.data);
+    initData.listings = initData.listings.map((listing) => ({
+        ...listing, 
+        owner:"6874ce02c12cf35ba448971e"
+    }));
+    await Listing.insertMany(initData.listings);
 }
 
 initDB()
     .then(() => {
         console.log("Database Initialized successfully!");
-        mongoose.connection.close();
     })
     .catch((err) => {
         console.error("Error initializing database:", err);
-        mongoose.connection.close();
     });
