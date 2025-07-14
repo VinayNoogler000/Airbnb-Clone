@@ -12,11 +12,6 @@ router.get("/", wrapAsync( async (req, res) => {
     res.render("listings/index.ejs", { listings });
 }));
 
-// define a Route to Serve a FORM to Create a NEW PROPERTY LISTING:
-router.get("/new", isLoggedIn, (req, res) => {
-    res.render("listings/new.ejs");
-});
-
 // define a Route to ADD a NEW SAMPLE LISTING:
 router.get("/sample", wrapAsync (async (req, res) => {
     // create a demo document in the Listing collection:
@@ -34,16 +29,21 @@ router.get("/sample", wrapAsync (async (req, res) => {
     res.send("Demo listing created successfully!");
 }));
 
+// define a Route to Serve a FORM to Create a NEW PROPERTY LISTING:
+router.get("/new", isLoggedIn, (req, res) => {
+    res.render("listings/new.ejs");
+});
+
 // define a Route to Handle the Form Submission for Creating a New Property Listing:
 router.post("/", isLoggedIn, validateModel(listingSchema), wrapAsync( async (req, res) => {
-
     // create a new property listing object:
     const newListing = new Listing({
         ...req.body.listing, 
         image: {
             filename: !req.body.listing.image ? "" : req.body.listing.title, 
             url: req.body.listing.image
-        }
+        },
+        owner: req.user._id
     });
 
     // Save the New Listing to DB:
@@ -57,14 +57,13 @@ router.post("/", isLoggedIn, validateModel(listingSchema), wrapAsync( async (req
 // define a Route to VIEW the PROPERTY LISTING IN DETAIL:
 router.get("/:id", wrapAsync( async (req, res, next) => {
     const { id } = req.params;
-    const listing = await Listing.findById(id).populate("reviews", "_id rating comment createdAt");
+    const listing = await Listing.findById(id).populate("reviews", "_id rating comment createdAt").populate("owner", "_id username email");
 
     if (!listing) {
         req.flash("error", "Listing which you want to view Doesn't Exists!");
         return res.redirect("/listings");
     }
-
-    res.render("listings/show.ejs", { listing });
+    else res.render("listings/show.ejs", { listing });
 }));
 
 

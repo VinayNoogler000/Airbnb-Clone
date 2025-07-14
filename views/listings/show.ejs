@@ -6,6 +6,7 @@
     <div class="listing-card col-6">
         <img src="<%= listing.image.url %> " class="card-img-top" alt="<%= listing.title %>" loading="eager">
         <div class="card-body">
+            <p class="card-text"><b>Owned By:</b> <i><%= listing.owner.username %></i></p>
             <p class="card-text"><%= listing.description %></p>
             <p class="card-text"><b>Price:</b> &#8377;<%= listing.price.toLocaleString("en-IN") %> </p>
             <p class="card-text"><b>Location:</b> <%= listing.location %></p>
@@ -13,6 +14,7 @@
         </div>
     </div>
 
+    <% if (user && user._id.equals(listing.owner._id)) { %>
     <div class="links">
         <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning" role="button"><i class="fa-solid fa-pencil"></i> &nbsp;  Edit</a>
 
@@ -20,6 +22,7 @@
             <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i> &nbsp;  Delete</button>
         </form>
     </div>
+    <% } %>
 
     <hr class="col-6 mt-4"/>
 
