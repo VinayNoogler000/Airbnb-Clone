@@ -71,30 +71,55 @@ router.get("/:id", wrapAsync( async (req, res, next) => {
 router.get("/:id/edit", isLoggedIn, wrapAsync( async (req, res) => {
     const { id } = req.params;
     const listing = await Listing.findById(id);
+    const currUser = res.locals.currUser;
 
     if (!listing) {
         req.flash("error", "Listing which you want to edit Doesn't Exists!");
         return res.redirect("/listings");
     }
-
-    res.render("listings/edit.ejs", { listing });
+    else {
+        // check, whether user is authorized to edit this listing or not?
+        if (!currUser._id.equals(listing.owner._id)) {
+            req.flash("error", "You're not allowed to edit this listing!");
+            res.redirect(`/listings/${id}`);
+        }
+        else res.render("listings/edit.ejs", { listing });
+    }
 }));
 
 // define a Route to Handle the Form Submission for UPDATING a PROPERTY LISTING:
 router.put("/:id", isLoggedIn, validateModel(listingSchema), wrapAsync( async (req, res) => {
     const { id } = req.params;
-    const updatedListing = {
-        ...req.body.listing,
-        image: {
-            filename: req.body.listing.image ? req.body.listing.title : "",
-            url: req.body.listing.image,
-        }
-    };
 
-    await Listing.findByIdAndUpdate(id, updatedListing, {runValidators: true});
-    req.flash("success", "Listing Updated Successfully!");
-    console.log("Listing Updated Successfully!");
-    res.redirect(`/listings/${id}`);
+    const listing = await Listing.findById(id);
+
+    if (!listing) {
+        req.flash("error", "Listing which you want to edit Doesn't Exists!");
+        return res.redirect("/listings");
+    }
+    else {
+        const currUser = res.locals.currUser;
+
+        // check, whether user is authorized to edit this listing or not?
+        if (!currUser._id.equals(listing.owner._id)) { 
+            req.flash("error", "You're not allowed to edit this listing!");
+            res.redirect(`/listings/${id}`);
+        }
+        else {
+            const updatedListing = {
+                ...req.body.listing,
+                image: {
+                    filename: req.body.listing.image ? req.body.listing.title : "",
+                    url: req.body.listing.image,
+                }
+            };
+
+            await Listing.findByIdAndUpdate(id, updatedListing, {runValidators: true});
+            req.flash("success", "Listing Updated Successfully!");
+            console.log("Listing Updated Successfully!");
+            res.redirect(`/listings/${id}`);
+        }
+    } 
 }));
 
 // define a Route to Handle the DELETION of a PROPERTY LISTING:
