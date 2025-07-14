@@ -44,7 +44,9 @@ const listingSchema = new mongoose.Schema({
     }],
     owner: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
+        required: [true, 'Owner is required'],
+        unique: [true, 'Owner must be unique']
     }
 });
 
