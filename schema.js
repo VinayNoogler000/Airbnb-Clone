@@ -8,7 +8,6 @@ listingSchema = Joi.object({
         location: Joi.string().required(),
         country: Joi.string().required(),
         image: Joi.string().allow("", null),
-        owner: Joi.string().required()
     }).required()
 });
 
