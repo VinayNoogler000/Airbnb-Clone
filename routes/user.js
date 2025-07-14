@@ -3,7 +3,7 @@ const validateModel = require("../utils/validateModel.js");
 const { userSchema } = require("../schema.js");
 const User = require("../models/user.js");
 const passport = require("passport");
-const { isLoggedIn } = require("../utils/isLoggedIn.js");
+const { isLoggedIn, saveRedirectUrl } = require("../utils/isLoggedIn.js");
 
 // router.get("/demo", wrapAsync( async (req, res) => {
 //     const newUser = new User ({
@@ -46,14 +46,28 @@ router.get("/login", (req, res) => {
     res.render("users/login.ejs");
 });
 
-router.post("/login", validateModel(userSchema), 
+router.post("/login", validateModel(userSchema), saveRedirectUrl,
     passport.authenticate("local", {
         failureRedirect: "/login", 
         failureFlash: true
     }), 
-    (req, res) => {
+    (req, res) => { 
+        let originalUrl = res.locals.redirectUrl || "/listings"; 
+
+        if (originalUrl !== "/listings") { 
+            // When Client-Request to Add, or Delete a Review:
+            if (originalUrl.includes("/reviews")) {
+                originalUrl = originalUrl.split("/reviews")[0];
+            }
+            // When Client-Request to Delete a Listing:
+            else if (originalUrl.endsWith("?_method=DELETE")) {
+                originalUrl = originalUrl.split("?_method=DELETE")[0];
+            }
+            // And, when Client-Request to Create or Edit a listing, the `originalUrl` will be same as the paths will be "/listings/new", and "/listings/:id/edit", repectively.
+        }
+
         req.flash("success", `Welcome Back, @${req.body.username}!`);
-        res.redirect("/listings");
+        res.redirect(originalUrl);
     }
 );
 
