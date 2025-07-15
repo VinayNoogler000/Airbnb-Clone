@@ -56,7 +56,12 @@ router.post("/", isLoggedIn, validateModel(listingSchema), wrapAsync(async (req,
 // define a Route to VIEW the PROPERTY LISTING IN DETAIL:
 router.get("/:id", wrapAsync(async (req, res, next) => {
     const { id } = req.params;
-    const listing = await Listing.findById(id).populate("reviews", "_id rating comment createdAt").populate("owner", "_id username email");
+    const listing = await Listing.findById(id).populate({
+        path: "reviews", 
+        populate: {
+            path: "author"
+        }
+    }).populate("owner", "_id username email");
 
     if (!listing) {
         req.flash("error", "Listing which you want to view Doesn't Exists!");

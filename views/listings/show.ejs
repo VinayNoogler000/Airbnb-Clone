@@ -58,7 +58,7 @@
                 <% listing.reviews.forEach((review) => { %>
                     <div class="card review-card py-2 col">
                         <div class="card-body">
-                            <h5 class="card-title"> John Doe &nbsp; <%= review.rating %> <span class="star">★</span></h5>
+                            <h5 class="card-title"> <%= review.author.username %> &nbsp; <%= review.rating %> <span class="star">★</span></h5>
                             <h6 class="card-subtitle"> Reviewed on &nbsp;<%= review.createdAt.toLocaleDateString("en-IN", { year: "numeric", month: "long" }) %> </h6>
                             <p class="card-text"> <%= review.comment %> </p>
                         </div>
