@@ -1,9 +1,9 @@
 const express = require("express");
+const router = express.Router();
+const { isLoggedIn, isAuthorized, validateModel } = require("../utils/middlewares.js");
 const Listing = require("../models/listing");
 const { listingSchema } = require("../schema.js");
-const { isLoggedIn, isAuthorized, validateModel } = require("../utils/middlewares.js");
 const wrapAsync = require("../utils/wrapAsync");
-const router = express.Router();
 
 // define a Route to Server All Listings to the client:
 router.get("/", wrapAsync( async (req, res) => {

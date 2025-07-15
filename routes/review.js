@@ -1,11 +1,11 @@
 const express = require("express");
+const router = express.Router({ mergeParams: true});
+const { isLoggedIn, isAuthorized, validateModel } = require("../utils/middlewares.js");
+const wrapAsync = require("../utils/wrapAsync");
 const Listing = require("../models/listing");
 const Review = require("../models/review");
 const { reviewSchema } = require("../schema.js");
-const { isLoggedIn, validateModel } = require("../utils/middlewares.js");
-const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
-const router = express.Router({ mergeParams: true});
 
 // define a Route to Add a Review to a Property Listing:
 router.post("/", isLoggedIn, validateModel(reviewSchema), wrapAsync( async(req, res) => {
