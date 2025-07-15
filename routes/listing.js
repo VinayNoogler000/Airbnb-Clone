@@ -3,7 +3,7 @@ const router = express.Router();
 const { isLoggedIn, isAuthorized, validateModel } = require("../utils/middlewares.js");
 const { listingSchema } = require("../schema.js");
 const wrapAsync = require("../utils/wrapAsync");
-const { index, viewListing, addSampleListing, renderAddForm, addListing, renderEditForm, updateListing, deleteListing } = require("../controllers/listings.js");
+const { index, viewListing, addSampleListing, renderAddForm, addListing, renderEditForm, updateListing, deleteListing } = require("../controllers/listing.js");
 
 // define a Route to Server All Listings to the client:
 router.get("/", wrapAsync(index));
