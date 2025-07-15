@@ -41,7 +41,7 @@ module.exports.isAuthorized = (model) => {
             const listing = await Listing.findById(id);
             
             if (!currUser._id.equals(listing.owner._id)) {
-                req.flash("error", "You're not allowed to modify this listing!");
+                req.flash("error", "Only owner of the property listing can edit or delete it!");
                 res.redirect(`/listings/${id}`);
             }
             else next();
@@ -54,7 +54,7 @@ module.exports.isAuthorized = (model) => {
             const review = await Review.findById(reviewId);
             
             if (!currUser._id.equals(review.author._id)) {
-                req.flash("error", "You're not allowed to delete this review!");
+                req.flash("error", "Only author of the review can edit or delete it!");
                 res.redirect(`/listings/${id}`);
             }
             else next();
