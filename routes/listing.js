@@ -11,7 +11,7 @@ router.get("/", wrapAsync(index));
 // define a Route to VIEW the PROPERTY LISTING IN DETAIL:
 router.get("/:id", wrapAsync(viewListing));
 
-// define a Route to ADD a NEW SAMPLE LISTING:
+// define a Route to ADD a NEW SAMPLE LISTING (Only For Testing):
 router.get("/sample", wrapAsync(addSampleListing));
 
 // define a Route to Serve a FORM to Create a NEW PROPERTY LISTING:

@@ -8,7 +8,7 @@ const index = async (req, res) => {
     res.render("listings/index.ejs", { listings });
 };
 
-// Function to Add a Sample Listing:
+// Function to Add a Sample Listing (Only For Testing):
 const addSampleListing = async (req, res) => {
     // create a demo document in the Listing collection:
     const demoListing = new Listing({
