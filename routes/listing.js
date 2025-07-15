@@ -8,9 +8,6 @@ const { index, viewListing, addSampleListing, renderAddForm, addListing, renderE
 // define a Route to Server All Listings to the client:
 router.get("/", wrapAsync(index));
 
-// define a Route to VIEW the PROPERTY LISTING IN DETAIL:
-router.get("/:id", wrapAsync(viewListing));
-
 // define a Route to ADD a NEW SAMPLE LISTING (Only For Testing):
 router.get("/sample", wrapAsync(addSampleListing));
 
@@ -19,6 +16,9 @@ router.get("/new", isLoggedIn, renderAddForm);
 
 // define a Route to Handle the Form Submission for Creating a New Property Listing:
 router.post("/", isLoggedIn, validateModel(listingSchema), wrapAsync(addListing));
+
+// define a Route to VIEW the PROPERTY LISTING IN DETAIL:
+router.get("/:id", wrapAsync(viewListing));
 
 // define a Route to Render a Form to EDIT a PROPERTY LISTING:
 router.get("/:id/edit", isLoggedIn, isAuthorized("listing"), wrapAsync(renderEditForm));
