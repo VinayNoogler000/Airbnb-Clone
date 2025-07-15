@@ -1,7 +1,7 @@
 const express = require("express");
 const Listing = require("../models/listing");
 const { listingSchema } = require("../schema.js");
-const { isLoggedIn, validateModel } = require("../utils/middlewares.js");
+const { isLoggedIn, isAuthorized, validateModel } = require("../utils/middlewares.js");
 const wrapAsync = require("../utils/wrapAsync");
 const router = express.Router();
 
@@ -67,62 +67,31 @@ router.get("/:id", wrapAsync( async (req, res, next) => {
 
 
 // define a Route to Render a Form to EDIT a PROPERTY LISTING:
-router.get("/:id/edit", isLoggedIn, wrapAsync( async (req, res) => {
+router.get("/:id/edit", isLoggedIn, isAuthorized, wrapAsync( async (req, res) => {
     const { id } = req.params;
     const listing = await Listing.findById(id);
-    const currUser = res.locals.currUser;
-
-    if (!listing) {
-        req.flash("error", "Listing which you want to edit Doesn't Exists!");
-        return res.redirect("/listings");
-    }
-    else {
-        // check, whether user is authorized to edit this listing or not?
-        if (!currUser._id.equals(listing.owner._id)) {
-            req.flash("error", "You're not allowed to edit this listing!");
-            res.redirect(`/listings/${id}`);
-        }
-        else res.render("listings/edit.ejs", { listing });
-    }
+    res.render("listings/edit.ejs", { listing });
 }));
 
 // define a Route to Handle the Form Submission for UPDATING a PROPERTY LISTING:
-router.put("/:id", isLoggedIn, validateModel(listingSchema), wrapAsync( async (req, res) => {
+router.put("/:id", isLoggedIn, isAuthorized, validateModel(listingSchema), wrapAsync( async (req, res) => {
     const { id } = req.params;
-
-    const listing = await Listing.findById(id);
-
-    if (!listing) {
-        req.flash("error", "Listing which you want to edit Doesn't Exists!");
-        return res.redirect("/listings");
-    }
-    else {
-        const currUser = res.locals.currUser;
-
-        // check, whether user is authorized to edit this listing or not?
-        if (!currUser._id.equals(listing.owner._id)) { 
-            req.flash("error", "You're not allowed to edit this listing!");
-            res.redirect(`/listings/${id}`);
+    const updatedListing = {
+        ...req.body.listing,
+        image: {
+            filename: req.body.listing.image ? req.body.listing.title : "",
+            url: req.body.listing.image,
         }
-        else {
-            const updatedListing = {
-                ...req.body.listing,
-                image: {
-                    filename: req.body.listing.image ? req.body.listing.title : "",
-                    url: req.body.listing.image,
-                }
-            };
+    };
 
-            await Listing.findByIdAndUpdate(id, updatedListing, {runValidators: true});
-            req.flash("success", "Listing Updated Successfully!");
-            console.log("Listing Updated Successfully!");
-            res.redirect(`/listings/${id}`);
-        }
-    } 
+    await Listing.findByIdAndUpdate(id, updatedListing, {runValidators: true});
+    console.log("Listing Updated Successfully!");
+    req.flash("success", "Listing Updated Successfully!");
+    res.redirect(`/listings/${id}`);
 }));
 
 // define a Route to Handle the DELETION of a PROPERTY LISTING:
-router.delete("/:id", isLoggedIn, wrapAsync( async (req, res) => {
+router.delete("/:id", isLoggedIn, isAuthorized, wrapAsync( async (req, res) => {
     const { id } = req.params;
     await Listing.findByIdAndDelete(id);
 
