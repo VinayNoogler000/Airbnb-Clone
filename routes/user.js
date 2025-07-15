@@ -1,9 +1,8 @@
 const router = require("express").Router();
-const validateModel = require("../utils/validateModel.js");
+const { isLoggedIn, saveRedirectUrl, validateModel } = require("../utils/middlewares.js");
 const { userSchema } = require("../schema.js");
 const User = require("../models/user.js");
 const passport = require("passport");
-const { isLoggedIn, saveRedirectUrl } = require("../utils/isLoggedIn.js");
 
 // router.get("/demo", wrapAsync( async (req, res) => {
 //     const newUser = new User ({

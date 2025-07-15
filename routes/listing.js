@@ -1,8 +1,7 @@
 const express = require("express");
 const Listing = require("../models/listing");
 const { listingSchema } = require("../schema.js");
-const { isLoggedIn } = require("../utils/isLoggedIn.js");
-const validateModel = require("../utils/validateModel");
+const { isLoggedIn, validateModel } = require("../utils/middlewares.js");
 const wrapAsync = require("../utils/wrapAsync");
 const router = express.Router();
 
