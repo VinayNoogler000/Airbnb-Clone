@@ -6,13 +6,13 @@ const { listingSchema } = require("../schema.js");
 const wrapAsync = require("../utils/wrapAsync");
 
 // define a Route to Server All Listings to the client:
-router.get("/", wrapAsync( async (req, res) => {
+router.get("/", wrapAsync(async (req, res) => {
     const listings = await Listing.find({});
     res.render("listings/index.ejs", { listings });
 }));
 
 // define a Route to ADD a NEW SAMPLE LISTING:
-router.get("/sample", wrapAsync (async (req, res) => {
+router.get("/sample", wrapAsync(async (req, res) => {
     // create a demo document in the Listing collection:
     const demoListing = new Listing({
         title: "Sample Listing",
@@ -34,12 +34,12 @@ router.get("/new", isLoggedIn, (req, res) => {
 });
 
 // define a Route to Handle the Form Submission for Creating a New Property Listing:
-router.post("/", isLoggedIn, validateModel(listingSchema), wrapAsync( async (req, res) => {
+router.post("/", isLoggedIn, validateModel(listingSchema), wrapAsync(async (req, res) => {
     // create a new property listing object:
     const newListing = new Listing({
-        ...req.body.listing, 
+        ...req.body.listing,
         image: {
-            filename: !req.body.listing.image ? "" : req.body.listing.title, 
+            filename: !req.body.listing.image ? "" : req.body.listing.title,
             url: req.body.listing.image
         },
         owner: req.user._id
@@ -47,14 +47,14 @@ router.post("/", isLoggedIn, validateModel(listingSchema), wrapAsync( async (req
 
     // Save the New Listing to DB:
     await newListing.save();
-    
+
     req.flash("success", "New Listing Created Successfully!");
     console.log("New Listing Created Successfully!");
     res.redirect("/listings");
 }));
 
 // define a Route to VIEW the PROPERTY LISTING IN DETAIL:
-router.get("/:id", wrapAsync( async (req, res, next) => {
+router.get("/:id", wrapAsync(async (req, res, next) => {
     const { id } = req.params;
     const listing = await Listing.findById(id).populate("reviews", "_id rating comment createdAt").populate("owner", "_id username email");
 
@@ -67,14 +67,14 @@ router.get("/:id", wrapAsync( async (req, res, next) => {
 
 
 // define a Route to Render a Form to EDIT a PROPERTY LISTING:
-router.get("/:id/edit", isLoggedIn, isAuthorized, wrapAsync( async (req, res) => {
+router.get("/:id/edit", isLoggedIn, isAuthorized("listing"), wrapAsync(async (req, res) => {
     const { id } = req.params;
     const listing = await Listing.findById(id);
     res.render("listings/edit.ejs", { listing });
 }));
 
 // define a Route to Handle the Form Submission for UPDATING a PROPERTY LISTING:
-router.put("/:id", isLoggedIn, isAuthorized, validateModel(listingSchema), wrapAsync( async (req, res) => {
+router.put("/:id", isLoggedIn, isAuthorized("listing"), validateModel(listingSchema), wrapAsync(async (req, res) => {
     const { id } = req.params;
     const updatedListing = {
         ...req.body.listing,
@@ -84,14 +84,14 @@ router.put("/:id", isLoggedIn, isAuthorized, validateModel(listingSchema), wrapA
         }
     };
 
-    await Listing.findByIdAndUpdate(id, updatedListing, {runValidators: true});
+    await Listing.findByIdAndUpdate(id, updatedListing, { runValidators: true });
     console.log("Listing Updated Successfully!");
     req.flash("success", "Listing Updated Successfully!");
     res.redirect(`/listings/${id}`);
 }));
 
 // define a Route to Handle the DELETION of a PROPERTY LISTING:
-router.delete("/:id", isLoggedIn, isAuthorized, wrapAsync( async (req, res) => {
+router.delete("/:id", isLoggedIn, isAuthorized("listing"), wrapAsync(async (req, res) => {
     const { id } = req.params;
     await Listing.findByIdAndDelete(id);
 
