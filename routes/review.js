@@ -12,6 +12,7 @@ router.post("/", isLoggedIn, validateModel(reviewSchema), wrapAsync( async(req, 
     // Create a new review instance
     const newReview = new Review({
         ...req.body.review,
+        author: req.user._id
     });
 
     // Find the listing by ID and push the new review into its reviews array
@@ -25,22 +26,22 @@ router.post("/", isLoggedIn, validateModel(reviewSchema), wrapAsync( async(req, 
     // Save the updated listing & the new review
     await newReview.save();
     await listing.save();
+    console.log("Review Added Successfully!");
 
     // Redirect to the listing's detail page
     req.flash("success", "Review Added Successfully!");
-    console.log("Review Added Successfully!");
     res.redirect(`/listings/${listing._id}`);
 }));
 
 // define a Route to Delete a Review from a Property Listing:
-router.delete("/:reviewId", isLoggedIn, wrapAsync( async (req, res) => {
+router.delete("/:reviewId", isLoggedIn, isAuthorized("review"), wrapAsync( async (req, res) => {
     const { id: listingId, reviewId } = req.params;
     
     await Listing.findByIdAndUpdate(listingId, { $pull: {reviews: reviewId} });
     await Review.findByIdAndDelete(reviewId);
 
-    req.flash("success", "Review Deleted Successfully!");
     console.log(`Review with ID ${reviewId} deleted successfully from listing ${listingId}`);
+    req.flash("success", "Review Deleted Successfully!");
     res.redirect(`/listings/${listingId}`);
 }));
 
