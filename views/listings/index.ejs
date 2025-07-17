@@ -7,7 +7,7 @@
         <% listings.forEach( (el) => { %>
             <a href="/listings/<%= el._id %>" class="listing-link col">
                 <div class="card">
-                    <img src="<%= el.image.url %>" class="card-img-top" alt="<%= el.title %>" loading="lazy">
+                    <img src="<%= el.image.url %>" class="card-img-top" alt="<%= el.image.filename %>" loading="lazy">
                     <div class="card-body">
                         <h3 class="card-title"><%= el.title %></h3>
                         <span class="card-text"> &#8377; <%= el.price.toLocaleString("en-IN") %> / night</span>
