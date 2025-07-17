@@ -5,28 +5,24 @@ const { listingSchema } = require("../schema.js");
 const wrapAsync = require("../utils/wrapAsync");
 const { index, viewListing, addSampleListing, renderAddForm, addListing, renderEditForm, updateListing, deleteListing } = require("../controllers/listing.js");
 
-// define a Route to Server All Listings to the client:
-router.get("/", wrapAsync(index));
+// Define Routes to RENDER ALL LISTINGS & CREATING a New Property Listing:
+router.route('/')
+    .get(wrapAsync(index))
+    .post(isLoggedIn, validateModel(listingSchema), wrapAsync(addListing));
 
-// define a Route to ADD a NEW SAMPLE LISTING (Only For Testing):
-router.get("/sample", wrapAsync(addSampleListing));
-
-// define a Route to Serve a FORM to Create a NEW PROPERTY LISTING:
+// define a Route to Serve a FORM to CREATE a Property Listing:
 router.get("/new", isLoggedIn, renderAddForm);
 
-// define a Route to Handle the Form Submission for Creating a New Property Listing:
-router.post("/", isLoggedIn, validateModel(listingSchema), wrapAsync(addListing));
+// Define Routes to VIEW, UPDATE, & DELETE a Property Listing:
+router.route("/:id")
+    .get(wrapAsync(viewListing))
+    .put(isLoggedIn, isAuthorized("listing"), validateModel(listingSchema), wrapAsync(updateListing))
+    .delete(isLoggedIn, isAuthorized("listing"), wrapAsync(deleteListing));
 
-// define a Route to VIEW the PROPERTY LISTING IN DETAIL:
-router.get("/:id", wrapAsync(viewListing));
-
-// define a Route to Render a Form to EDIT a PROPERTY LISTING:
+// define a Route to Render a Form to EDIT a Property Listing:
 router.get("/:id/edit", isLoggedIn, isAuthorized("listing"), wrapAsync(renderEditForm));
 
-// define a Route to Handle the Form Submission for UPDATING a PROPERTY LISTING:
-router.put("/:id", isLoggedIn, isAuthorized("listing"), validateModel(listingSchema), wrapAsync(updateListing));
-
-// define a Route to Handle the DELETION of a PROPERTY LISTING:
-router.delete("/:id", isLoggedIn, isAuthorized("listing"), wrapAsync(deleteListing));
+// define a Route to ADD a NEW SAMPLE LISTING (Only For Testing):
+// router.get("/sample", wrapAsync(addSampleListing));
 
 module.exports = router;
