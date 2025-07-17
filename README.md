@@ -21,3 +21,4 @@
    - 'Model' refers to a folder in the server directory which stores DB Models (or Collections), which allows us to perform CRUD Ops. in DBs
    - 'View' refers to a folder containing templates (or dynamic HTML docs) to be rendered and sent to the client (or browser), and
    - 'Controller' refers to a folder containing route-handlers or API functions/callbacks to be executed when the server (Express web app) receives HTTP client-request on a particular path of a website of a particular HTTP-Method, to get access to a resource or to perform CRUD Ops.  
+15. **Router.route() method**: It helps us to avoid the redundancy of writing the route/path (to which client sends requests to) multipe times, for each and every type of HTTP-requests and route-handlers, by allowing us to write the route/path only once, and group all the route-handlers for the same path, below it, increasing the code readability and maintainability, also avoiding writing incorrect path.
