@@ -1,5 +1,5 @@
 // import all required libraries:
-require("dotenv").config();
+if(process.env.NODE_ENV !== "production") require("dotenv").config();
 const express = require("express");
 const methodOverride = require("method-override");
 const path = require("path");
@@ -19,7 +19,7 @@ const usersRouter = require("./routes/user.js");
 
 // Create EXPRESS APP:
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8080;
 
 // define SESSION's OPTIONS wiht COOKIES:
 const sessionOptions = {
