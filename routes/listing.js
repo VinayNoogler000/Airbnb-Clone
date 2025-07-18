@@ -13,7 +13,7 @@ const upload = multer({ storage });
 // Define Routes to RENDER ALL LISTINGS & CREATING a New Property Listing:
 router.route('/')
     .get(wrapAsync(index))
-    .post(isLoggedIn, validateModel(listingSchema), upload.single("listing[image]"), wrapAsync(addListing));
+    .post(isLoggedIn, upload.single("listing[image]"), validateModel(listingSchema), wrapAsync(addListing));
 
 // define a Route to Serve a FORM to CREATE a Property Listing:
 router.get("/new", isLoggedIn, renderAddForm);
