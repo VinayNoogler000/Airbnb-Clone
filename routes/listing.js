@@ -4,11 +4,16 @@ const { isLoggedIn, isAuthorized, validateModel } = require("../utils/middleware
 const { listingSchema } = require("../schema.js");
 const wrapAsync = require("../utils/wrapAsync");
 const { index, viewListing, addSampleListing, renderAddForm, addListing, renderEditForm, updateListing, deleteListing } = require("../controllers/listing.js");
+const multer = require("multer");
+const { storage } = require("../cloudConfig.js");
+
+// Initialize Multer by specifying the destination, where uploaded files will be saved:
+const upload = multer({ storage });
 
 // Define Routes to RENDER ALL LISTINGS & CREATING a New Property Listing:
 router.route('/')
     .get(wrapAsync(index))
-    .post(isLoggedIn, validateModel(listingSchema), wrapAsync(addListing));
+    .post(isLoggedIn, validateModel(listingSchema), upload.single("listing[image]"), wrapAsync(addListing));
 
 // define a Route to Serve a FORM to CREATE a Property Listing:
 router.get("/new", isLoggedIn, renderAddForm);

@@ -36,8 +36,8 @@ const addListing = async (req, res) => {
     const newListing = new Listing({
         ...req.body.listing,
         image: {
-            filename: !req.body.listing.image ? "" : req.body.listing.title,
-            url: req.body.listing.image
+            filename: req.file ? req.file.filename : `${req.listing.title} Property Image`  ,
+            url: req.file.path
         },
         owner: req.user._id
     });
