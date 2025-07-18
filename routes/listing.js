@@ -21,7 +21,7 @@ router.get("/new", isLoggedIn, renderAddForm);
 // Define Routes to VIEW, UPDATE, & DELETE a Property Listing:
 router.route("/:id")
     .get(wrapAsync(viewListing))
-    .put(isLoggedIn, isAuthorized("listing"), validateModel(listingSchema), wrapAsync(updateListing))
+    .put(isLoggedIn, isAuthorized("listing"), upload.single("listing[image]"), validateModel(listingSchema), wrapAsync(updateListing))
     .delete(isLoggedIn, isAuthorized("listing"), wrapAsync(deleteListing));
 
 // define a Route to Render a Form to EDIT a Property Listing:

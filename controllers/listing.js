@@ -69,9 +69,13 @@ const viewListing = async (req, res, next) => {
 
 // Function to Render a Form to Edit a Listing:
 const renderEditForm = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.params;   
     const listing = await Listing.findById(id);
-    res.render("listings/edit.ejs", { listing });
+
+    // optimize listing's image
+    let optimizedImgUrl = listing.image.url.replace("/upload", "/upload/w_200");
+
+    res.render("listings/edit.ejs", { listing, optimizedImgUrl });
 }
 
 // Function to Edit/Update a Listing in the DB:
@@ -80,8 +84,8 @@ const updateListing = async (req, res) => {
     const updatedListing = {
         ...req.body.listing,
         image: {
-            filename: req.body.listing.image ? req.body.listing.title : "",
-            url: req.body.listing.image,
+            filename: req.file ? req.file.filename : `${req.body.listing.title} Property Image`,
+            url: req.file ? req.file.path : "",
         }
     };
 

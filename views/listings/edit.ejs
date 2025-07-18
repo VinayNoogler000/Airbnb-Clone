@@ -3,7 +3,7 @@
 <body>
     <h2>Edit the Property Listing</h2>
 
-    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="listing-form col-12 needs-validation" novalidate>
+    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="listing-form col-12 needs-validation" enctype="multipart/form-data" novalidate>
         <div class="mb-3 mb-sm-4">
             <label for="title" class="form-label">Title:</label>
             <input type="text" id="title" class="form-control" name="listing[title]" placeholder="Enter property title" value="<%= listing.title %>" required>
@@ -41,9 +41,14 @@
             <div class="invalid-feedback">Please enter a valid location.</div>
         </div>
 
+        <div class="mb-3 mb-sm-4 prev-img">
+            <p class="form-label"> Previous Image </p>
+            <img src="<%= optimizedImgUrl %>" alt="<%= listing.image.filename %>" loading="eager">
+        </div>
+
         <div class="mb-4 mb-sm-5">
-            <label for="image" class="form-label">Image:</label>
-            <input type="url" id="image" class="form-control" name="listing[image]" value="<%= listing.image.url %>" placeholder="https://images.unsplash.com/photo-1749259560252-ca132892004f?q=80&w=2772&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" required>
+            <label for="image" class="form-label">Upload New Image:</label>
+            <input type="file" id="image" class="form-control" name="listing[image]">
             <div class="valid-feedback">Looks Good!</div>
             <div class="invalid-feedback">Please enter a valid image link.</div>
         </div>
