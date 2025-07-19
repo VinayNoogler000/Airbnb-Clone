@@ -1,6 +1,7 @@
 // This file defines the Mongoose schema and model for a listing in a marketplace application.
 const mongoose = require('mongoose');
 const Review = require('./review');
+const cookieParser = require('cookie-parser');
 
 // Define the schema for a listing
 const listingSchema = new mongoose.Schema({
@@ -37,6 +38,17 @@ const listingSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Country is required'],
         trim: true
+    },
+    geometry: {
+        type: {
+            type: String,
+            enum: ["Point"],
+            require: true
+        },
+        coordinates: {
+            type: [Number],
+            required: true,
+        }
     },
     reviews: [{
         type: mongoose.Schema.Types.ObjectId,

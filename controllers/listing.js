@@ -1,6 +1,9 @@
 // THIS FILE CONTAINS FUNCTIONS AS ROUTE-HANDLERS TO PERFORM CRUD OPERATIONS IN THE LISTING MODEL.
 
 const Listing = require("../models/listing");
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const mapBoxToken = process.env.MAP_TOKEN;
+const geocodingClient = mbxGeocoding({ accessToken: mapBoxToken });
 
 // Function to Render All Listings on the `index.ejs` page:
 const index = async (req, res) => {
@@ -32,9 +35,17 @@ const renderAddForm = (req, res) => {
 
 // Function to Add a New Listing to the Database:
 const addListing = async (req, res) => {
+    // Get Geo-Coordinates of the Proprty Listing Location using MapBox Geocoding API:
+    let {location, country} = req.body.listing;
+    let response = await geocodingClient.forwardGeocode({
+        query: `${location}, ${country}`,
+        limit: 1
+    }).send();
+
     // create a new property listing object:
     const newListing = new Listing({
         ...req.body.listing,
+        coordinates: response.body.features[0].geometry.coordinates,
         image: {
             filename: req.file ? req.file.filename : `${req.body.listing.title} Property Image`,
             url: req.file ? req.file.path : ""
