@@ -45,7 +45,7 @@ const addListing = async (req, res) => {
     // create a new property listing object:
     const newListing = new Listing({
         ...req.body.listing,
-        coordinates: response.body.features[0].geometry.coordinates,
+        geometry: response.body.features[0].geometry,
         image: {
             filename: req.file ? req.file.filename : `${req.body.listing.title} Property Image`,
             url: req.file ? req.file.path : ""
@@ -55,7 +55,6 @@ const addListing = async (req, res) => {
 
     // Save the New Listing to DB:
     await newListing.save();
-
     req.flash("success", "New Listing Created Successfully!");
     console.log("New Listing Created Successfully!");
     res.redirect("/listings");
