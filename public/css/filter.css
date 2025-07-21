@@ -1,0 +1,39 @@
+/* Styling for Filters Container: */
+#filters {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Styling for Individual Filter: */
+.filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 2px solid transparent;
+    transition: border 0.2s ease-in-out;
+}
+
+.filter i,
+.filter span {
+    opacity: 0.8;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.filter span {
+    font-size: 0.8rem;
+    ;
+    opacity: 0.8;
+}
+
+.filter:hover,
+.filter:hover i,
+.filter:hover span {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.filter:hover {
+    border-bottom: 2px solid black;
+}
