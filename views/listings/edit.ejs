@@ -19,31 +19,94 @@
         </div>
 
         <div class="row">
-            <div class="mb-3 mb-sm-4 col-md-4">
+            <div class="mb-3 mb-sm-4 col-md-6">
+                <label for="category" class="form-label">Category:</label>
+                <select id="category" class="form-select" name="listing[category]" required>
+                    <% if(!listing.category || listing.category.length === 0) { %>
+                        <option value="" selected>Select Category</option>
+                    <% } else { %>
+                        <option value="" >Select Category</option>
+
+                        <% if(listing.category === "comfort-rooms") { %>
+                            <option value="comfort-rooms" selected>Comfortable Rooms</option>
+                        <% } else if(listing.category === "iconic-city") { %>
+                            <option value="iconic-city" selected>Iconic City</option>
+                        <% } else if(listing.category === "mountains") { %>
+                            <option value="mountains" selected>Mountains</option>
+                        <% } else if(listing.category === "castles") { %>
+                            <option value="castles" selected>Castle</option>
+                        <% } else if(listing.category === "pools") { %>
+                            <option value="pools" selected>Amazing Pool</option>
+                        <% } else if(listing.category === "camps") { %>
+                            <option value="camps" selected>Camping</option>
+                        <% } else if(listing.category === "farms") { %>
+                            <option value="farms" selected>Farm</option>
+                        <% } else if(listing.category === "arctic") { %>
+                            <option value="arctic" selected>Arctic</option>
+                        <% } else if(listing.category === "beaches") { %>
+                            <option value="beaches" selected>Beache</option>
+                        <% } %>
+                    <% } %>
+                        
+                    <% if(listing.category !== "comfort-rooms") { %>
+                        <option value="comfort-rooms">Comfortable Rooms</option>
+                    <% } %>
+                    <% if(listing.category !== "iconic-city") { %>
+                        <option value="iconic-city">Iconic City</option>
+                    <% } %>
+                    <% if(listing.category !== "mountains") { %>
+                        <option value="mountains">Mountains</option>
+                    <% } %>
+                    <% if(listing.category !== "castles") { %>
+                        <option value="castles">Castle</option>
+                    <% } %>
+                    <% if(listing.category !== "pools") { %>
+                        <option value="pools">Amazing Pool</option>
+                    <% } %>
+                    <% if(listing.category !== "camps") { %>
+                        <option value="camps">Camping</option>
+                    <% } %>
+                    <% if(listing.category !== "farms") { %>
+                        <option value="farms">Farm</option>
+                    <% } %>
+                    <% if(listing.category !== "arctic") { %>
+                        <option value="arctic">Arctic</option>
+                    <% } %>
+                    <% if(listing.category !== "beaches") { %>
+                        <option value="beaches">Beaches</option>
+                    <% } %>
+                </select>
+                <div class="valid-feedback">Looks Good!</div>
+                <div class="invalid-feedback">Please enter a valid price.</div>
+            </div>
+
+            <div class="mb-3 mb-sm-4 col-md-6">
                 <label for="price" class="form-label">Price (&#8377;):</label>
                 <input type="number" id="price" class="form-control" name="listing[price]" placeholder="Enter property price" value="<%= listing.price %>" required>
                 <div class="valid-feedback">Looks Good!</div>
                 <div class="invalid-feedback">Please enter a valid price.</div>
             </div>
+        </div>
 
-            <div class="mb-3 mb-sm-4 col-md-8">
+        <div class="row">
+            <div class="mb-3 mb-sm-4 col-md-6">
+                <label for="location" class="form-label">Location:</label>
+                <input type="text" id="location" class="form-control" name="listing[location]" placeholder="Enter property location" value="<%= listing.location %>" required>
+                <div class="valid-feedback">Looks Good!</div>
+                <div class="invalid-feedback">Please enter a valid location.</div>
+            </div>
+
+            <div class="mb-3 mb-sm-4 col-md-6">
                 <label for="country" class="form-label">Country:</label>
                 <input type="text" id="country" class="form-control" name="listing[country]" placeholder="Enter property country" value="<%= listing.country %>" required>
                 <div class="valid-feedback">Looks Good!</div>
                 <div class="invalid-feedback">Please enter a valid country.</div>
             </div>
         </div>
-
+            
         <div class="mb-3 mb-sm-4">
-            <label for="location" class="form-label">Location:</label>
-            <input type="text" id="location" class="form-control" name="listing[location]" placeholder="Enter property location" value="<%= listing.location %>" required>
-            <div class="valid-feedback">Looks Good!</div>
-            <div class="invalid-feedback">Please enter a valid location.</div>
-        </div>
-
-        <div class="mb-3 mb-sm-4 prev-img">
-            <p class="form-label"> Previous Image </p>
-            <img src="<%= optimizedImgUrl %>" alt="<%= listing.image.filename %>" loading="eager">
+            <p class="form-label"> Previous Image: </p>
+            <img class="prev-img" src="<%= optimizedImgUrl %>" alt="<%= listing.image.filename %>" loading="eager">
         </div>
 
         <div class="mb-4 mb-sm-5">
@@ -53,12 +116,8 @@
             <div class="invalid-feedback">Please enter a valid image link.</div>
         </div>
 
-
         <div class="row justify-content-center text-center">
             <button type="submit" class="col-3 btn btn-primary listing-form-btn">Edit</button>
         </div>
-    
     </form>
-    </div>
-
 </body>

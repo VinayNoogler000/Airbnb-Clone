@@ -10,6 +10,7 @@ module.exports.listings = [
     price: 1500,
     location: "Malibu",
     country: "United States",
+    category: "beaches",
   },
   {
     title: "Modern Loft in Downtown",
@@ -22,6 +23,7 @@ module.exports.listings = [
     price: 1200,
     location: "New York City",
     country: "United States",
+    category: "iconic-city",
   },
   {
     title: "Mountain Retreat",
@@ -34,6 +36,7 @@ module.exports.listings = [
     price: 1000,
     location: "Aspen",
     country: "United States",
+    category: "mountains",
   },
   {
     title: "Historic Villa in Tuscany",
@@ -46,6 +49,7 @@ module.exports.listings = [
     price: 2500,
     location: "Florence",
     country: "Italy",
+    category: "castles",
   },
   {
     title: "Secluded Treehouse Getaway",
@@ -58,6 +62,7 @@ module.exports.listings = [
     price: 800,
     location: "Portland",
     country: "United States",
+    category: "camps",
   },
   {
     title: "Beachfront Paradise",
@@ -70,6 +75,7 @@ module.exports.listings = [
     price: 2000,
     location: "Cancun",
     country: "Mexico",
+    category: "pools",
   },
   {
     title: "Rustic Cabin by the Lake",
@@ -82,6 +88,7 @@ module.exports.listings = [
     price: 900,
     location: "Lake Tahoe",
     country: "United States",
+    category: "mountains",
   },
   {
     title: "Luxury Penthouse with City Views",
@@ -94,6 +101,7 @@ module.exports.listings = [
     price: 3500,
     location: "Los Angeles",
     country: "United States",
+    category: "iconic-city",
   },
   {
     title: "Ski-In/Ski-Out Chalet",
@@ -106,6 +114,7 @@ module.exports.listings = [
     price: 3000,
     location: "Verbier",
     country: "Switzerland",
+    category: "arctic",
   },
   {
     title: "Safari Lodge in the Serengeti",
@@ -118,6 +127,7 @@ module.exports.listings = [
     price: 4000,
     location: "Serengeti National Park",
     country: "Tanzania",
+    category: "camps",
   },
   {
     title: "Historic Canal House",
@@ -130,6 +140,7 @@ module.exports.listings = [
     price: 1800,
     location: "Amsterdam",
     country: "Netherlands",
+    category: "iconic-city",
   },
   {
     title: "Private Island Retreat",
@@ -142,6 +153,7 @@ module.exports.listings = [
     price: 10000,
     location: "Fiji",
     country: "Fiji",
+    category: "beaches",
   },
   {
     title: "Charming Cottage in the Cotswolds",
@@ -154,6 +166,7 @@ module.exports.listings = [
     price: 1200,
     location: "Cotswolds",
     country: "United Kingdom",
+    category: "farms",
   },
   {
     title: "Historic Brownstone in Boston",
@@ -166,6 +179,7 @@ module.exports.listings = [
     price: 2200,
     location: "Boston",
     country: "United States",
+    category: "iconic-city",
   },
   {
     title: "Beachfront Bungalow in Bali",
@@ -178,6 +192,7 @@ module.exports.listings = [
     price: 1800,
     location: "Bali",
     country: "Indonesia",
+    category: "beaches",
   },
   {
     title: "Mountain View Cabin in Banff",
@@ -190,6 +205,7 @@ module.exports.listings = [
     price: 1500,
     location: "Banff",
     country: "Canada",
+    category: "mountains",
   },
   {
     title: "Art Deco Apartment in Miami",
@@ -202,6 +218,7 @@ module.exports.listings = [
     price: 1600,
     location: "Miami",
     country: "United States",
+    category: "iconic-city",
   },
   {
     title: "Tropical Villa in Phuket",
@@ -214,6 +231,7 @@ module.exports.listings = [
     price: 3000,
     location: "Phuket",
     country: "Thailand",
+    category: "pools",
   },
   {
     title: "Historic Castle in Scotland",
@@ -226,6 +244,7 @@ module.exports.listings = [
     price: 4000,
     location: "Scottish Highlands",
     country: "United Kingdom",
+    category: "castles",
   },
   {
     title: "Desert Oasis in Dubai",
@@ -238,6 +257,7 @@ module.exports.listings = [
     price: 5000,
     location: "Dubai",
     country: "United Arab Emirates",
+    category: "pools",
   },
   {
     title: "Rustic Log Cabin in Montana",
@@ -250,6 +270,7 @@ module.exports.listings = [
     price: 1100,
     location: "Montana",
     country: "United States",
+    category: "farms",
   },
   {
     title: "Beachfront Villa in Greece",
@@ -262,6 +283,7 @@ module.exports.listings = [
     price: 2500,
     location: "Mykonos",
     country: "Greece",
+    category: "beaches",
   },
   {
     title: "Eco-Friendly Treehouse Retreat",
@@ -274,6 +296,7 @@ module.exports.listings = [
     price: 750,
     location: "Costa Rica",
     country: "Costa Rica",
+    category: "camps",
   },
   {
     title: "Historic Cottage in Charleston",
@@ -286,6 +309,7 @@ module.exports.listings = [
     price: 1600,
     location: "Charleston",
     country: "United States",
+    category: "comfort-rooms",
   },
   {
     title: "Modern Apartment in Tokyo",
@@ -298,6 +322,7 @@ module.exports.listings = [
     price: 2000,
     location: "Tokyo",
     country: "Japan",
+    category: "iconic-city",
   },
   {
     title: "Lakefront Cabin in New Hampshire",
@@ -310,6 +335,7 @@ module.exports.listings = [
     price: 1200,
     location: "New Hampshire",
     country: "United States",
+    category: "mountains",
   },
   {
     title: "Luxury Villa in the Maldives",
@@ -322,6 +348,7 @@ module.exports.listings = [
     price: 6000,
     location: "Maldives",
     country: "Maldives",
+    category: "pools",
   },
   {
     title: "Ski Chalet in Aspen",
@@ -334,6 +361,7 @@ module.exports.listings = [
     price: 4000,
     location: "Aspen",
     country: "United States",
+    category: "arctic",
   },
   {
     title: "Secluded Beach House in Costa Rica",
@@ -346,5 +374,6 @@ module.exports.listings = [
     price: 1800,
     location: "Costa Rica",
     country: "Costa Rica",
+    category: "beaches",
   },
 ];

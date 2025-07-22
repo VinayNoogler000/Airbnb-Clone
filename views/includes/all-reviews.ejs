@@ -1,0 +1,26 @@
+<div class="reviews d-flex flex-column align-items-center">
+    <% if (listing.reviews.length > 0) { %>
+        <!-- Show All Reviews of this Property Listing -->
+        <h3 class="mt-2 mb-3">Reviews</h3>
+
+        <div class="row gap-3 justify-content-center">
+            <% listing.reviews.forEach((review) => { %>
+                <div class="card review-card py-2 col">
+                    <div class="card-body">
+                        <h5 class="card-title"> <%= review.author.username %></h5>
+                        <p class="starability-result card-text" data-rating="<%= review.rating %>"></p>
+                        <h6 class="card-subtitle"> Reviewed on &nbsp;<%= review.createdAt.toLocaleDateString("en-IN", { year: "numeric", month: "long" }) %> </h6>
+                        <p class="card-text"> <%= review.comment %> </p>
+                    </div>
+
+                    <form method="post" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" class="review-delete-form">
+                        <abbr title="Delete Review"> <button type="submit" class="btn btn-outline-danger"><i class="fa-solid fa-trash"><i></button> </abbr>
+                    </form>
+                </div>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <h3>No Reviews Yet</h3>
+        <p>Be the first to review this listing!</p>
+    <% } %>
+</div>

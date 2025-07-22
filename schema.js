@@ -4,6 +4,7 @@ listingSchema = Joi.object({
     listing: Joi.object({
         title: Joi.string().required(),
         description: Joi.string().required(),
+        category: Joi.string().required().allow("comfort-rooms", "iconic-city", "mountains", "castles", "pools", "camps", "farms", "arctic", "beaches"),
         price: Joi.number().required().min(0),
         location: Joi.string().required(),
         country: Joi.string().required(),

@@ -3,7 +3,7 @@
 <body>    
     <%- include("../includes/filter.ejs") %>
 
-    <div class="listings mt-3 row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1 g-6">
+    <div class="listings mt-3 row justify-content-center row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1 g-6">
         <% listings.forEach( (listing) => { %>
             <a href="/listings/<%= listing._id %>" class="listing-link col">
                 <div class="card">

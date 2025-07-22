@@ -6,6 +6,11 @@
     gap: 1.5rem;
 }
 
+/* Styling for Filter-Links: */
+a.filter-link {
+    color: initial !important;
+}
+
 /* Styling for Individual Filter: */
 .filter {
     display: flex;

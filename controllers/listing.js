@@ -77,6 +77,24 @@ const viewListing = async (req, res, next) => {
     else res.render("listings/show.ejs", { listing });
 }
 
+// Function to Render Filtered Listings, based-on user-decided category:
+const filterListing = async (req, res) => {
+    const { category } = req.query;
+    const filteredListings = await Listing.find({ category });
+
+    if(!filteredListings || filteredListings.length === 0) {
+        if (category.includes('-')) {
+            req.flash("error", `No Listings Found of Category: ${category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")}!`);
+        }
+        else {
+            req.flash("error", `No Listings Found of Category: ${category.charAt(0).toUpperCase() + category.slice(1)}!`)
+        }
+        return res.redirect("/listings");
+    }
+
+    res.render("listings/index.ejs", { listings: filteredListings }); 
+}
+
 // Function to Render a Form to Edit a Listing:
 const renderEditForm = async (req, res) => {
     const { id } = req.params;   
@@ -91,11 +109,18 @@ const renderEditForm = async (req, res) => {
 // Function to Edit/Update a Listing in the DB:
 const updateListing = async (req, res) => {
     const { id } = req.params;
+
+    let prevImg;
+    if (!req.body.listing.image) {
+        let oldListing = await Listing.findById(id);
+        prevImg = oldListing.image;
+    }
+
     const updatedListing = {
         ...req.body.listing,
         image: {
-            filename: req.file ? req.file.filename : `${req.body.listing.title} Property Image`,
-            url: req.file ? req.file.path : "",
+            filename: req.file ? req.file.filename : prevImg.filename,
+            url: req.file ? req.file.path : prevImg.url,
         }
     };
 
@@ -115,4 +140,4 @@ const deleteListing = async (req, res) => {
     res.redirect("/listings");
 }
 
-module.exports = { index, addSampleListing, renderAddForm, addListing, viewListing, renderEditForm, updateListing, deleteListing };
+module.exports = { index, addSampleListing, renderAddForm, addListing, viewListing, filterListing, renderEditForm, updateListing, deleteListing };

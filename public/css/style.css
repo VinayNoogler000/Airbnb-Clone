@@ -36,7 +36,6 @@ body {
 /* Anchor Styles */
 a {
     text-decoration: none !important;
-    color: inherit;
 }
 
 /* Container Styles */
@@ -67,6 +66,8 @@ h1, h2 {
 
 /* Listings Styles */
 .listing-link {
+    min-width: 17.5rem !important; /* 280px*/
+    max-width: 25rem !important; /* 400px */
     transition: transform 0.3s ease-in-out;
 }
 
@@ -76,8 +77,8 @@ h1, h2 {
 
 /* Listing Card Styles */
 .listings .card {
-    min-width: 100%;
-    min-height: 100%;
+    min-width: 17.5rem !important; /* 280px*/
+    max-width: 25rem !important; /* 400px */
     border: none !important;
     margin-bottom: 2rem !important;
 }
@@ -254,6 +255,11 @@ abbr {
 
 .review-delete-form .fa-trash {
     font-size: 0.75rem;
+}
+
+/* Edit Page Styles */
+img.prev-img {
+    width: 200px;
 }
 
 /* Footer Styles */

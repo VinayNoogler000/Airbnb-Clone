@@ -15,6 +15,12 @@ const listingSchema = new mongoose.Schema({
         required: [true, 'Description is required'],
         trim: true
     },
+    category: {
+        type: String,
+        required: [true, 'Category is required'],
+        trim: true,
+        enum: ["comfort-rooms", "iconic-city", "mountains", "castles", "pools", "camps", "farms", "arctic", "beaches"]
+    },
     price: {
         type: Number,
         required: [true, 'Price is required'],
@@ -24,15 +30,6 @@ const listingSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Location is required'],
         trim: true
-    },
-    image: {
-        // Default image URL, if no image is provided
-        filename: String || "",
-        url: {
-            type: String,
-            default: "https://images.unsplash.com/photo-1749259560252-ca132892004f?q=80&w=2772&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            set: v => v === "" ? "https://images.unsplash.com/photo-1749259560252-ca132892004f?q=80&w=2772&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" : v
-        },
     },
     country: {
         type: String,
@@ -50,6 +47,15 @@ const listingSchema = new mongoose.Schema({
             required: true,
         }
     },
+    image: {
+        // Default image URL, if no image is provided
+        filename: String || "",
+        url: {
+            type: String,
+            default: "https://images.unsplash.com/photo-1749259560252-ca132892004f?q=80&w=2772&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            set: v => v === "" ? "https://images.unsplash.com/photo-1749259560252-ca132892004f?q=80&w=2772&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" : v
+        },
+    },
     reviews: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Review"
@@ -58,7 +64,6 @@ const listingSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: [true, 'Owner is required'],
-        unique: [true, 'Owner must be unique']
     }
 });
 
