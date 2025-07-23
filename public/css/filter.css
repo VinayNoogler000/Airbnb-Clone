@@ -1,6 +1,7 @@
 /* Styling for Filters Container: */
 #filters {
     width: 100%;
+    max-width: 1550px;
     display: flex;
     align-items: center;
     gap: 1.5rem;
@@ -22,14 +23,13 @@ a.filter-link {
 
 .filter i,
 .filter span {
-    opacity: 0.8;
+    opacity: 0.75;
     transition: opacity 0.2s ease-in-out;
 }
 
 .filter span {
     font-size: 0.8rem;
-    ;
-    opacity: 0.8;
+    opacity: 0.75;
 }
 
 .filter:hover,
@@ -41,4 +41,19 @@ a.filter-link {
 
 .filter:hover {
     border-bottom: 2px solid black;
+}
+
+/* Styling for Input[Check] Element for Toggling Taxes */
+.tax-toggle  {
+    border: 1px solid black;
+    border-radius: 0.75rem;
+    transition: 0.2s ease-in-out;
+}
+
+.tax-toggle, .tax-toggle label, .tax-toggle input {
+    cursor: pointer;
+}
+
+.tax-toggle:hover {
+    background-color: #ebebeb;
 }

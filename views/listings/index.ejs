@@ -10,12 +10,13 @@
                     <img src="<%= listing.image.url %>" class="card-img-top" alt="<%= listing.image.filename %>" loading="lazy">
                     <div class="card-body">
                         <h3 class="card-title"><%= listing.title %></h3>
-                        <span class="card-text"> &#8377; <%= listing.price.toLocaleString("en-IN") %> / night</span>
+                        <span class="card-text"> &#8377; <span class="price"><%= listing.price.toLocaleString("en-IN") %></span> / night</span>
                     </div>
                 </div>
             </a>
         <% }) %>
     </div>
 
+    <script src="/js/toggleTaxes.js" defer></script>
 </body>
 
