@@ -14,6 +14,40 @@ a {
     text-decoration: none !important;
 }
 
+/* Form Elements with Floating Labels Styles */
+.form-floating-label {
+    min-width: 375px;
+    position: relative;
+}
+
+.form-floating-label label {
+    color: #fe424d;
+    font-weight: 600;
+    margin: 0;
+    position: absolute;
+    left: 1rem;
+    top: 17.5%;
+    transition: all 0.25s ease-in-out;
+}
+
+.form-floating-label input {
+    border-color: #fe424d !important;
+    background-color: #f8f9fa !important;
+}
+
+.form-floating-label input::placeholder {
+    opacity: 0 !important;
+}
+
+.form-floating-label input:focus ~ label, .form-floating-label input:not(:placeholder-shown) ~ label {
+    top: -12.5%;
+    font-size: 0.9rem;
+    line-height: 0.6;
+    padding: 0 0.35rem;
+    font-weight: 500;
+    background-color: #f8f9fa !important;
+}
+
 /* Container Styles */
 main {
     width: 100%;
