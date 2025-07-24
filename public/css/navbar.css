@@ -1,0 +1,51 @@
+/* NavBar Styles */
+.navbar {
+    max-height: 5.5rem;
+    padding: 1rem !important;
+    background-color: #f8f9fa;
+}
+
+@media (max-width: 576px) {
+    .navbar {
+        max-height: fit-content;
+    }
+}
+
+/* NavBar Brand Styling */
+.fa-compass {
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+/* NavLinks Styles */
+.nav-link {
+    color: #222222 !important;
+}
+
+/* Search Styles */
+.nav-search input {
+    border-radius: 1.5rem;
+    border-width: 2px;
+    padding: 0.35rem 1rem !important;
+}
+
+.nav-search .search-btn {
+    color: white;
+    border: 2px solid transparent !important;
+    border-radius: 1.5rem;
+    background-color: #fe424d !important;
+    transition: background-color 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.nav-search .search-btn:hover {
+    background-color: #e33a45 !important;
+}
+
+.nav-search .search-btn:active {
+    color: #fe424d;
+    background-color: white !important;
+    border: 2px solid #fe424d !important;
+}

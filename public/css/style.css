@@ -9,30 +9,6 @@ body {
     font-family: "Plus Jakarta Sans", sans-serif !important;
 }
 
-/* NavBar Styles */
-.navbar {
-    max-height: 5.5rem;
-    padding: 1rem !important;
-    background-color: #f8f9fa;
-}
-
-@media (max-width: 576px) {
-    .navbar {
-        max-height: fit-content;
-    }
-}
-
-/* NavBar Brand Styling */
-.fa-compass {
-    color: #fe424d;
-    font-size: 2rem;
-}
-
-/* NavLinks Styles */
-.nav-link {
-    color: #222222 !important;
-}
-
 /* Anchor Styles */
 a {
     text-decoration: none !important;
