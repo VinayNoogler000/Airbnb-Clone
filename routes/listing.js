@@ -3,7 +3,7 @@ const router = express.Router();
 const { isLoggedIn, isAuthorized, validateModel } = require("../utils/middlewares.js");
 const { listingSchema } = require("../schema.js");
 const wrapAsync = require("../utils/wrapAsync");
-const { index, viewListing, filterListing, addSampleListing, renderAddForm, addListing, renderEditForm, updateListing, deleteListing } = require("../controllers/listing.js");
+const { index, viewListing, filterListing, searchListing, addSampleListing, renderAddForm,  addListing, renderEditForm, updateListing, deleteListing } = require("../controllers/listing.js");
 const multer = require("multer");
 const { storage } = require("../cloudConfig.js");
 
@@ -20,6 +20,9 @@ router.get("/filter", wrapAsync(filterListing));
 
 // Define a Route to Serve a FORM to CREATE a Property Listing:
 router.get("/new", isLoggedIn, renderAddForm);
+
+// Define a Route to Search and Render all the Listings whose location/country matches the user's query:
+router.get("/search", wrapAsync(searchListing))
 
 // Define Routes to VIEW, UPDATE, & DELETE a Property Listing:
 router.route("/:id")

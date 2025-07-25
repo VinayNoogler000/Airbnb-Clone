@@ -95,6 +95,31 @@ const filterListing = async (req, res) => {
     res.render("listings/index.ejs", { listings: filteredListings }); 
 }
 
+// Function to Search and Render all those Listings (in DB) whose location/country matches the User's Query:
+const searchListing = async (req, res) => {
+    let { dest } = req.query;
+    dest = dest.trim();
+
+    let listings;
+    if (dest.includes(',')) {
+        const splittedDest = dest.split(','); // [location, country]
+        const location = splittedDest[0].trim();
+        const country = splittedDest[1].trim();
+
+        listings = await Listing.find({ $or: [{ location }, { country }] });
+    }
+    else {    
+        listings = await Listing.find({ $or: [{ location: dest }, { country: dest }] });
+    }
+    
+    if(!listings || listings.length === 0) {
+        req.flash("error", `No Listings Found in ${dest}!`);
+        return res.redirect("/listings");
+    }
+
+    res.render("listings/index.ejs", { listings });
+} 
+
 // Function to Render a Form to Edit a Listing:
 const renderEditForm = async (req, res) => {
     const { id } = req.params;   
@@ -140,4 +165,4 @@ const deleteListing = async (req, res) => {
     res.redirect("/listings");
 }
 
-module.exports = { index, addSampleListing, renderAddForm, addListing, viewListing, filterListing, renderEditForm, updateListing, deleteListing };
+module.exports = { index, addSampleListing, renderAddForm, addListing, viewListing, filterListing, searchListing, renderEditForm, updateListing, deleteListing };

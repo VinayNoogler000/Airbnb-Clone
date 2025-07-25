@@ -48,6 +48,10 @@ a {
     background-color: #f8f9fa !important;
 }
 
+.form-floating-label input:not(:focus) {
+    font-weight: 500;
+}
+
 /* Container Styles */
 main {
     width: 100%;
