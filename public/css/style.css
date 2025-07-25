@@ -3,9 +3,9 @@
 /* Global Font Style */
 body {
     min-height: 100vh;
+    margin-top: 5rem !important;
     display: flex;
     flex-direction: column;
-
     font-family: "Plus Jakarta Sans", sans-serif !important;
 }
 
@@ -16,7 +16,7 @@ a {
 
 /* Form Elements with Floating Labels Styles */
 .form-floating-label {
-    min-width: 375px;
+    height: 40px;
     position: relative;
 }
 

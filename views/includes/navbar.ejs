@@ -1,32 +1,42 @@
-<nav class="navbar navbar-expand-sm bg-body-light border-bottom sticky-top">
+<nav class="navbar navbar-expand-md bg-body-tertiary fixed-top">
   <div class="container-fluid">
+
+    <!-- NavBar Brand and Toggler -->
     <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
-    
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" href="/listings ">Explore</a>
-      </div>
-      
-      <div class="navbar-nav nav-search">
-        <form class="d-flex form-floating-label" role="search" method="get" action="/listings/search">
-          <input type="search" id="search-input" class="form-control me-2" placeholder="Search Destination" name="dest" aria-label="Search" required/>
-          <label for="search-input" class="form-label">Search Destination</label>
-          <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
-        </form>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+
+      <!-- NavBar Header -->
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">RentEase</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
 
-      <div class="navbar-nav">
-        <a class="nav-link" href="/listings/new">Rent your home</a>
+      <!-- NavBar Body -->
+      <div class="offcanvas-body d-flex-md justify-content-md-between">
+        <div class="navbar-nav d-none d-md-block">
+          <a class="nav-link" aria-current="page" href="/listings"><b>Explore</b></a>
+        </div>
+
+        <form class="d-flex form-floating-label nav-search mb-2 mb-md-0" role="search" method="get" action="/listings/search">
+          <input type="search" id="search-input" class="form-control me-2" placeholder="Search Destination" name="dest" aria-label="Search" required/>
+          <label for="search-input" class="form-label">Search Destination</label>
+          <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i> <span class="text">Search</span></button>
+        </form>
+
+        <div class="navbar-nav justify-content-end pe-3">
+          <a class="nav-link d-md-none" aria-current="page" href="/listings"><b>Explore</b></a>
+          <a class="nav-link" href="/listings/new"><b>Rent your home</b></a>
         <% if (!currUser) { %>
-          <a class="nav-link" href="/signup"><b>Sign Up</b></a>
-          <a class="nav-link" href="/login "><b>Login</b></a>
+          <a class="nav-link active" href="/login ">Login</a>
         <% } else { %>
-          <a class="nav-link" href="/logout"><b>Logout</b></a>
+          <a class="nav-link" href="/logout">Logout</a>
         <% } %>
+        </div>
       </div>
     </div>
   </div>
