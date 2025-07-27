@@ -80,13 +80,19 @@ h1, h2 {
 
 /* Listings Styles */
 .listing-link {
+    width: 23.5rem !important; /* 350px */
     min-width: 17.5rem !important; /* 280px*/
-    max-width: 25rem !important; /* 400px */
     transition: transform 0.3s ease-in-out;
 }
 
 .listing-link:hover {
     transform: scale(1.02);
+}
+
+@media (max-width: 410px) {
+    .listing-link {
+        width: 20.5rem !important;
+    }
 }
 
 /* Listing Card Styles */
