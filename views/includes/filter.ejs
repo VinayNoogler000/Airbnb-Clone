@@ -1,69 +1,85 @@
-<div id="filters" class="position-relative">
-    <a href="/listings/filter?category=trending" class="filter-link">
-        <div class="filter">
-            <i class="fa-solid fa-fire-flame-curved"></i>
-            <span>Trending</span>
-        </div>
-    </a>
+<div id="filters" class="d-flex justify-content-between align-items-center">
 
-    <a href="/listings/filter?category=comfort-rooms" class="filter-link">
-        <div class="filter">
-            <i class="fa-solid fa-person-shelter"></i>
-            <span>Rooms</span>
-        </div>
-    </a>
+    <div class="scroll-filters d-flex justify-content-between align-items-center gap-3">
+        <button class="scroll-btn" id="scroll-left-btn"><i class="fa-solid fa-angle-left"></i></button>
 
-    <a href="/listings/filter?category=iconic-city" class="filter-link">
-        <div class="filter">
-            <i class="fa-solid fa-fire-flame-curved"></i>
-            <span>Iconic cities</span>
-        </div>
-    </a>
+        <div class="main d-flex gap-4 align-items-center overflow-x-scroll overflow-y-hidden">
+            <a href="/listings/filter?category=trending" class="filter-link">
+                <div class="filter">
+                    <i class="fa-solid fa-fire-flame-curved"></i>
+                    <span>Trending</span>
+                </div>
+            </a>
 
-    <a href="/listings/filter?category=mountains" class="filter-link">    
-        <div class="filter">
-            <i class="fa-solid fa-mountain"></i>            
-            <span>Mountains</span>
-        </div>
-    </a>
+            <a href="/listings/filter?category=comfort-rooms" class="filter-link">
+                <div class="filter">
+                    <i class="fa-solid fa-person-shelter"></i>
+                    <span>Rooms</span>
+                </div>
+            </a>
 
-    <a href="/listings/filter?category=castles" class="filter-link">
-        <div class="filter">
-            <i class="fa-brands fa-fort-awesome"></i>
-            <span>Castles</span>
-        </div>
-    </a>
+            <a href="/listings/filter?category=iconic-city" class="filter-link">
+                <div class="filter">
+                    <i class="fa-solid fa-fire-flame-curved"></i>
+                    <span>Iconic cities</span>
+                </div>
+            </a>
 
-    <a href="/listings/filter?category=pools" class="filter-link">
-        <div class="filter">
-            <i class="fa-solid fa-person-swimming"></i>
-            <span>Amazing pools</span>
-        </div>
-    </a>
-    
-    <a href="/listings/filter?category=camps" class="filter-link">
-        <div class="filter">
-            <i class="fa-solid fa-campground"></i>
-            <span>Camping</span>
-        </div>
-    </a>
+            <a href="/listings/filter?category=mountains" class="filter-link">    
+                <div class="filter">
+                    <i class="fa-solid fa-mountain"></i>            
+                    <span>Mountains</span>
+                </div>
+            </a>
 
-    <a href="/listings/filter?category=farms" class="filter-link">
-        <div class="filter">
-            <i class="fa-solid fa-cow"></i>
-            <span>Farms</span>
-        </div>
-    </a>
+            <a href="/listings/filter?category=castles" class="filter-link">
+                <div class="filter">
+                    <i class="fa-brands fa-fort-awesome"></i>
+                    <span>Castles</span>
+                </div>
+            </a>
 
-    <a href="/listings/filter?category=beaches" class="filter-link">
-        <div class="filter">
-            <i class="fa-solid fa-snowflake"></i>
-            <span>Arctic</span>
-        </div>
-    </a>
+            <a href="/listings/filter?category=pools" class="filter-link">
+                <div class="filter">
+                    <i class="fa-solid fa-person-swimming"></i>
+                    <span>Amazing pools</span>
+                </div>
+            </a>
 
-    <div class="tax-toggle form-check form-check-reverse form-switch p-2 pe-5 ms-5 position-absolute end-0">
-        <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
-        <label class="form-check-label" for="switchCheckDefault">Display Price after 18% Tax</label>
+            <a href="/listings/filter?category=camps" class="filter-link">
+                <div class="filter">
+                    <i class="fa-solid fa-campground"></i>
+                    <span>Camping</span>
+                </div>
+            </a>
+
+            <a href="/listings/filter?category=farms" class="filter-link">
+                <div class="filter">
+                    <i class="fa-solid fa-cow"></i>
+                    <span>Farms</span>
+                </div>
+            </a>
+
+            <a href="/listings/filter?category=arctic" class="filter-link">
+                <div class="filter">
+                    <i class="fa-solid fa-snowflake"></i>
+                    <span>Arctic</span>
+                </div>
+            </a>
+
+            <a href="/listings/filter?category=beaches" class="filter-link">
+                <div class="filter">
+                    <i class="fa-solid fa-umbrella-beach"></i>
+                    <span>Beaches</span>
+                </div>
+            </a>
+        </div>
+
+        <button class="scroll-btn" id="scroll-right-btn"><i class="fa-solid fa-angle-right"></i></button>
+    </div>
+        
+    <div class="tax-toggle form-check form-switch form-check-reverse p-2 pe-5 d-none d-md-block">
+        <input class="form-check-input" type="checkbox" id="switchCheckReverseFilter">
+        <label class="form-check-label" for="switchCheckReverseFilter">Display Price after 18% Tax</label>
     </div>
 </div>

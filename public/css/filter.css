@@ -4,12 +4,49 @@
     max-width: 1550px;
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 2rem;
+}
+
+.scroll-filters {
+    min-width: 300px;
+}
+
+.scroll-btn {
+    display: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    border-radius: 50%;
+    background-color: #fe424d;
+    font-size: 0.75rem;
+    transition: background-color 0.2s ease-in-out;;
+}
+
+.scroll-btn i {
+    color: white;
+}
+    
+.scroll-btn:hover {
+    background-color: #e33a45;
+}
+
+@media (max-width: 1190px) {
+    .scroll-btn {
+        display: inline-block;
+    }
+}
+
+#filters .main {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    min-width: 200px;
 }
 
 /* Styling for Filter-Links: */
 a.filter-link {
     color: initial !important;
+    flex-shrink: 0;
 }
 
 /* Styling for Individual Filter: */
@@ -45,7 +82,10 @@ a.filter-link {
 
 /* Styling for Toggling Taxes Input[Check] Element */
 .tax-toggle  {
+    min-width: 258px;
+    width: fit-content;
     color: #fe424d;
+    margin-top: 0.5rem;
     background-color: white !important;
     border: 1px solid black;
     border-radius: 0.75rem;
