@@ -1,0 +1,73 @@
+/* Review Form Styles in the Show Page */
+.review-form {
+    min-width: 270px;
+    max-width: 315px;
+    padding: 1rem 0.5rem;
+    border-radius: 1rem;
+    background-color: #ebebeb;
+}
+
+.form-range::-webkit-slider-runnable-track {
+    background-color: #fe424d !important;
+}
+
+.form-range::-webkit-slider-thumb {
+    background-color: black !important;
+}
+
+/* Reviews Styles */
+.reviews {
+    width: fit-content;
+    max-width: 950px;
+}
+
+.review-card {
+    min-width: 18.5rem !important;
+    max-width: 18.51rem !important;
+    border-radius: 1rem !important;
+    position: relative;
+}
+
+.review-card .card-title {
+    font-size: 1rem !important;
+    font-weight: 500;
+    margin-top: none !important;
+    margin-bottom: 0.25rem !important;
+}
+
+.review-card .star {
+    color: #ffa41c;
+    font-size: 1.15rem !important;
+}
+
+.review-card .card-subtitle {
+    font-size: 0.875rem !important;
+    color: #6c757d !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.review-card .card-text {
+    font-size: 1rem !important;
+    font-weight: 500;
+}
+
+.review-delete-form {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+}
+
+.review-delete-form button {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.review-delete-form .fa-trash {
+    font-size: 0.75rem;
+}
