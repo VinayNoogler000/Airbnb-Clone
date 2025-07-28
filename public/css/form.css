@@ -1,7 +1,10 @@
 /* Form Elements with Floating Labels Styles */
 .form-floating-label {
-    height: 40px;
     position: relative;
+}
+
+.navbar .form-floating-label {
+    height: 40px;
 }
 
 .form-floating-label label {
@@ -14,24 +17,121 @@
     transition: all 0.25s ease-in-out;
 }
 
-.form-floating-label input {
-    border-color: #fe424d !important;
-    background-color: #f8f9fa !important;
+.form-floating-label {
+    input, textarea, select {
+        border-color: #fe424d !important;
+        background-color: #f8f9fa !important;
+    }
 }
 
-.form-floating-label input::placeholder {
-    opacity: 0 !important;
+.form-floating-label {
+    input::placeholder, textarea::placeholder, select::placeholder {
+        opacity: 0 !important;
+    }
 }
 
-.form-floating-label input:focus ~ label, .form-floating-label input:not(:placeholder-shown) ~ label {
-    top: -12.5%;
-    font-size: 0.9rem;
-    line-height: 0.6;
-    padding: 0 0.35rem;
-    font-weight: 500;
-    background-color: #f8f9fa !important;
+.form-floating-label  {
+    input:focus ~ label, input:not(:placeholder-shown) ~ label, textarea:focus ~ label, textarea:not(:placeholder-shown) ~ label, select:focus ~ label, select:not(:placeholder-shown) ~ label {
+        top: -12.5%;
+        font-size: 0.9rem;
+        line-height: 0.6;
+        padding: 0 0.35rem;
+        font-weight: 500;
+        background-color: #f8f9fa !important;
+    }
 }
 
-.form-floating-label input:not(:focus) {
-    font-weight: 500;
+.form-floating-label
+{
+    input:not(:focus) {
+        font-weight: 500;
+    }
+
+    textarea:not(:focus) {
+        font-weight: 500;
+    }
+
+    select:not(:focus) {
+        font-weight: 500;
+    }
+}
+
+.form-floating-label.form-black {
+    .els-container {
+        margin-bottom: 1.75rem;
+    }
+
+    .els-container.inp-description {
+        margin-bottom: 2.25rem;
+    }
+
+    label {
+        color: #222222;
+    }
+
+    input, textarea, select {
+        border-color: #222222 !important;
+    }
+
+    input:focus, textarea:focus, select:focus {
+        border-color: #fe424d !important;
+        box-shadow: 0 0 0 .25rem rgba(254, 66, 77, .25);
+    }
+
+    input:focus ~ label, input:not(:placeholder-shown) ~ label, textarea:focus ~ label, textarea:not(:placeholder-shown) ~ label, select:focus ~ label, select:not(:placeholder-shown) ~ label {
+        color: #fe424d !important;
+        left: 0.5rem;
+    }
+
+   .h-lg { /* height large or more than normal */
+        height: 2.75rem;
+   }
+
+   .norm-label {
+        position: static;
+        display: block;
+        font-weight: 500;
+        margin-bottom: 0.3rem;
+        color: #fe424d;
+   }
+
+   .inp-description textarea:focus ~ label, .inp-description textarea:not(:placeholder-shown) ~ label {
+        top: -9.5% !important;
+    }
+
+   .els-container {
+        .valid-feedback, .invalid-feedback {
+            margin-top: 0 !important;
+        }
+   }
+
+   /* referring to <select> category in New Listing Form */
+   .new-listing.form-select {
+       font-weight: 500;
+   }
+
+   .new-listing.form-select ~ label {
+       color: #222222 !important;
+       font-size: 1rem;
+       font-weight: 600;
+       top: 32.5%;
+       transition: all 0.25s ease-in-out;
+   }
+
+   .new-listing.form-select:focus {
+        font-weight: 400;
+   }
+
+    .new-listing.form-select:focus ~ label, .new-listing.form-select:valid ~ label {
+        color: #fe424d !important;
+        font-weight: 500;
+        top: -12.5%;
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 576px) {
+    .listing-form .grp-containers { /* Of Category, Price, Location and Country in Edit Page form */
+        gap: 2rem !important;
+    }
 }

@@ -3,24 +3,23 @@
 <body>
     <h2>Edit the Property Listing</h2>
 
-    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="listing-form col-12 needs-validation" enctype="multipart/form-data" novalidate>
-        <div class="mb-3 mb-sm-4">
-            <label for="title" class="form-label">Title:</label>
+    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="listing-form col-12 mt-2 needs-validation form-floating-label form-black" enctype="multipart/form-data" novalidate>
+        <div class="els-container position-relative h-lg">
             <input type="text" id="title" class="form-control" name="listing[title]" placeholder="Enter property title" value="<%= listing.title %>" required>
+            <label for="title" class="form-label">Title</label>
             <div class="valid-feedback">Looks Good!</div>
             <div class="invalid-feedback">Please enter a valid title.</div>
         </div>
 
-        <div class="mb-3 mb-sm-4">
-            <label for="description" class="form-label">Description:</label>
+        <div class="els-container position-relative inp-description mt-sm-2">
             <textarea id="description" class="form-control" name="listing[description]" placeholder="Enter property description" required><%= listing.description %></textarea>
+            <label for="description" class="form-label">Description</label>
             <div class="valid-feedback">Looks Good!</div>
             <div class="invalid-feedback">Please enter a short description.</div>
         </div>
 
-        <div class="row">
-            <div class="mb-3 mb-sm-4 col-md-6">
-                <label for="category" class="form-label">Category:</label>
+        <div class="grp-containers mb-2 d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+            <div class="els-container w-100 w-sm-50 h-lg position-relative">
                 <select id="category" class="form-select" name="listing[category]" required>
                     <% if(!listing.category || listing.category.length === 0) { %>
                         <option value="" selected>Select Category</option>
@@ -76,41 +75,42 @@
                         <option value="beaches">Beaches</option>
                     <% } %>
                 </select>
+                <label for="category" class="form-label">Category</label>
                 <div class="valid-feedback">Looks Good!</div>
-                <div class="invalid-feedback">Please enter a valid price.</div>
+                <div class="invalid-feedback">Please select a relevant category.</div>
             </div>
 
-            <div class="mb-3 mb-sm-4 col-md-6">
-                <label for="price" class="form-label">Price (&#8377;):</label>
-                <input type="number" id="price" class="form-control" name="listing[price]" placeholder="Enter property price" value="<%= listing.price %>" required>
+            <div class="els-container w-100 w-sm-50 h-lg position-relative">
+                <input type="number" id="price" class="form-control" name="listing[price]" min="1" placeholder="Enter property price" value="<%= listing.price %>" required>
+                <label for="price" class="form-label">Price (&#8377;)</label>
                 <div class="valid-feedback">Looks Good!</div>
                 <div class="invalid-feedback">Please enter a valid price.</div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="mb-3 mb-sm-4 col-md-6">
-                <label for="location" class="form-label">Location:</label>
+        <div class="grp-containers d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+            <div class="els-container w-100 w-sm-50 h-lg position-relative">
                 <input type="text" id="location" class="form-control" name="listing[location]" placeholder="Enter property location" value="<%= listing.location %>" required>
+                <label for="location" class="form-label">Location</label>
                 <div class="valid-feedback">Looks Good!</div>
                 <div class="invalid-feedback">Please enter a valid location.</div>
             </div>
 
-            <div class="mb-3 mb-sm-4 col-md-6">
-                <label for="country" class="form-label">Country:</label>
+            <div class="els-container w-100 w-sm-50 h-lg position-relative">
                 <input type="text" id="country" class="form-control" name="listing[country]" placeholder="Enter property country" value="<%= listing.country %>" required>
+                <label for="country" class="form-label">Country</label>
                 <div class="valid-feedback">Looks Good!</div>
                 <div class="invalid-feedback">Please enter a valid country.</div>
             </div>
         </div>
             
-        <div class="mb-3 mb-sm-4">
-            <p class="form-label"> Previous Image: </p>
+        <div class="mb-4">
+            <label class="form-label norm-label"> Previous Image: </label>
             <img class="prev-img" src="<%= optimizedImgUrl %>" alt="<%= listing.image.filename %>" loading="eager">
         </div>
 
         <div class="mb-4 mb-sm-5">
-            <label for="image" class="form-label">Upload New Image:</label>
+            <label for="image" class="form-label norm-label">Upload New Image:</label>
             <input type="file" id="image" class="form-control" name="listing[image]">
             <div class="valid-feedback">Looks Good!</div>
             <div class="invalid-feedback">Please enter a valid image link.</div>

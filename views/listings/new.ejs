@@ -3,26 +3,25 @@
 <body>
     <h2>Create New Property Listing</h2>
 
-    <form method="POST" action="/listings" class="listing-form col-12 needs-validation" novalidate enctype="multipart/form-data">
-        <div class="mb-3 mb-sm-4">
-            <label for="title" class="form-label">Title:</label>
+    <form method="POST" action="/listings" class="listing-form col-12 mt-2  needs-validation form-floating-label form-black" novalidate enctype="multipart/form-data">
+        <div class="els-container position-relative h-lg">
             <input type="text" id="title" class="form-control" name="listing[title]" placeholder="Enter property title" required>
+            <label for="title" class="form-label">Title</label>
             <div class="valid-feedback">Looks Good!</div>
             <div class="invalid-feedback">Please enter a valid title.</div>
         </div>
 
-        <div class="mb-3 mb-sm-4">
-            <label for="description" class="form-label">Description:</label>
+        <div class="els-container position-relative inp-description mt-sm-2">
             <textarea id="description" class="form-control" name="listing[description]" placeholder="Enter property description" required></textarea>
+            <label for="description" class="form-label">Description</label>
             <div class="valid-feedback">Looks Good!</div>
             <div class="invalid-feedback">Please enter a short description.</div>
         </div>
 
-        <div class="row">
-            <div class="mb-3 mb-sm-4 col-md-6">
-                <label for="category" class="form-label">Category:</label>
-                <select id="category" class="form-select" name="listing[category]" required>
-                    <option value="" selected>Select Category</option>
+        <div class="grp-containers mb-2 d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+            <div class="els-container w-100 w-sm-50 h-lg position-relative">
+                <select id="category" class="form-select new-listing" name="listing[category]" required>
+                    <option value=""></option>
                     <option value="comfort-rooms">Comfortable Rooms</option>
                     <option value="iconic-city">Iconic City</option>
                     <option value="mountains">Mountains</option>
@@ -33,36 +32,37 @@
                     <option value="arctic">Arctic</option>
                     <option value="beaches">Beache</option>
                 </select>
+                <label for="category" class="form-label">Category</label>
                 <div class="valid-feedback">Looks Good!</div>
-                <div class="invalid-feedback">Please select one of the category from the options.</div>
+                <div class="invalid-feedback">Please select a relevant category</div>
             </div>
 
-            <div class="mb-3 mb-sm-4 col-md-6">
-                <label for="price" class="form-label">Price (&#8377;):</label>
+            <div class="els-container w-100 w-sm-50 h-lg position-relative">
                 <input type="number" id="price" class="form-control" name="listing[price]" min="1" placeholder="Enter property price" required>
+                <label for="price" class="form-label">Price (&#8377;)</label>
                 <div class="valid-feedback">Looks Good!</div>
                 <div class="invalid-feedback">Please enter a valid price.</div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="mb-3 mb-sm-4 col-md-6">
-                <label for="location" class="form-label">Location:</label>
+        <div class="grp-containers d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+            <div class="els-container w-100 w-sm-50 h-lg position-relative">
                 <input type="text" id="location" class="form-control" name="listing[location]" placeholder="Enter property location" required>
+                <label for="location" class="form-label">Location:</label>
                 <div class="valid-feedback">Looks Good!</div>
                 <div class="invalid-feedback">Please enter a valid location.</div>
             </div>
 
-            <div class="mb-3 mb-sm-4 col-md-6">
-                <label for="country" class="form-label">Country:</label>
+            <div class="els-container w-100 w-sm-50 h-lg position-relative">
                 <input type="text" id="country" class="form-control" name="listing[country]" placeholder="Enter property country" required>
+                <label for="country" class="form-label">Country:</label>
                 <div class="valid-feedback">Looks Good!</div>
                 <div class="invalid-feedback">Please enter a valid country.</div>
             </div>
         </div>
 
         <div class="mb-4 mb-sm-5">
-            <label for="image" class="form-label">Upload Property Image:</label>
+            <label for="image" class="form-label norm-label text-black">Upload Property Image:</label>
             <input type="file" id="image" class="form-control" name="listing[image]">
         </div>
 
