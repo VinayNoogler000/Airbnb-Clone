@@ -1,24 +1,28 @@
 const mongoose = require('mongoose');
 const Listing = require("../models/listing");
 const initData = require("./data");
+const getGeoCoordinates = require("../utils/getGeoCoordinates");
 
 const main = async () => {
     await mongoose.connect("mongodb://127.0.0.1:27017/wonderlust");
 }
 
+const initDB = async () => {
+    await Listing.deleteMany({});
+
+    // Loop to Add "gemoetry" & "owner" propertoies to each listing:
+    for(let listing of initData.listings) {
+        let geometry = await getGeoCoordinates(listing.location, listing.country);
+        listing.geometry = geometry;
+        listing.owner = "68760116b29e09a8e43edb34";
+    }
+
+    await Listing.insertMany(initData.listings);
+}
+
 main()
     .then(() => console.log("Successfully Connected to MongoDB"))
     .catch((err) => console.error("Error connecting to MongoDB:", err));
-
-
-const initDB = async () => {
-    await Listing.deleteMany({});
-    initData.listings = initData.listings.map((listing) => ({
-        ...listing, 
-        owner: "68760116b29e09a8e43edb34"
-    }));
-    await Listing.insertMany(initData.listings);
-}
 
 initDB()
     .then(() => {

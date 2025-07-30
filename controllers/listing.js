@@ -1,9 +1,7 @@
 // THIS FILE CONTAINS FUNCTIONS AS ROUTE-HANDLERS TO PERFORM CRUD OPERATIONS IN THE LISTING MODEL.
 
 const Listing = require("../models/listing");
-const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
-const mapBoxToken = process.env.MAP_TOKEN;
-const geocodingClient = mbxGeocoding({ accessToken: mapBoxToken });
+const getGeoCoordinates = require("../utils/getGeoCoordinates");
 
 // Function to Render All Listings on the `index.ejs` page:
 const index = async (req, res) => {
@@ -37,15 +35,12 @@ const renderAddForm = (req, res) => {
 const addListing = async (req, res) => {
     // Get Geo-Coordinates of the Proprty Listing Location using MapBox Geocoding API:
     let {location, country} = req.body.listing;
-    let response = await geocodingClient.forwardGeocode({
-        query: `${location}, ${country}`,
-        limit: 1
-    }).send();
+    let geometry = await getGeoCoordinates(location, country);
 
     // create a new property listing object:
     const newListing = new Listing({
         ...req.body.listing,
-        geometry: response.body.features[0].geometry,
+        geometry,
         image: {
             filename: req.file ? req.file.filename : `${req.body.listing.title} Property Image`,
             url: req.file ? req.file.path : ""
@@ -134,7 +129,9 @@ const renderEditForm = async (req, res) => {
 // Function to Edit/Update a Listing in the DB:
 const updateListing = async (req, res) => {
     const { id } = req.params;
+    const geometry = await getGeoCoordinates(req.body.listing.location, req.body.listing.country);
 
+    // Define logic to not update the image of the listing, if the user's listing-update request doesn't include the listing image:
     let prevImg;
     if (!req.body.listing.image) {
         let oldListing = await Listing.findById(id);
@@ -143,6 +140,7 @@ const updateListing = async (req, res) => {
 
     const updatedListing = {
         ...req.body.listing,
+        geometry,
         image: {
             filename: req.file ? req.file.filename : prevImg.filename,
             url: req.file ? req.file.path : prevImg.url,
