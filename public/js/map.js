@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
         zoom: 9, // starting zoom
     });
 
+    // Add Map Navigiation Controls:
+    map.addControl(new mapboxgl.NavigationControl());
+
     // Create a default Marker and add it to the map.
     const marker1 = new mapboxgl.Marker({color: "red"})
         .setLngLat(coordinates.length > 0 ? coordinates : [77.2088, 28.6139])
