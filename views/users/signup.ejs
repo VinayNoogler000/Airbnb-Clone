@@ -1,32 +1,32 @@
 <% layout("layouts/boilerplate.ejs") %>
 
-<body>
+<body class="signup-page">
     <h1>Sign-Up</h1>
 
-    <form method="POST" action="/signup" class="user-form col-12 needs-validation" novalidate>
-        <div class="mb-3 mb-sm-4">
-            <label for="name" class="form-label">Name:</label>
+    <form method="POST" action="/signup" class="user-form needs-validation form-floating-label form-black" novalidate>
+        <div class="mb-4 position-relative field-containers name-field">
             <input type="text" id="name" class="form-control" name="username" placeholder="Enter your name" required>
+            <label for="name" class="form-label">Name</label>
             <div class="valid-feedback">Looks Good!</div>
-            <div class="invalid-feedback">Please enter a valid username/id, only consisting of lowercase alphabets, numbers, underscores and hyphens.</div>
+            <div class="invalid-feedback">Please enter a valid username/id, only consisting of (a-z), (0-9),( _ ), and ( - )</div>
         </div>
 
-        <div class="mb-3 mb-sm-4">
-            <label for="email" class="form-label">Email:</label>
+        <div class="mb-4 position-relative field-containers email-field">
             <input type="email" id="email" class="form-control" name="email" placeholder="Enter your email" required />
+            <label for="email" class="form-label">Email</label>
             <div class="valid-feedback">Looks Good!</div>
             <div class="invalid-feedback">Please enter a valid email address.</div>
         </div>
         
-        <div class="mb-3 mb-sm-4">
-            <label for="password" class="form-label">Password:</label>
+        <div class="mb-5 position-relative field-containers password-field">
             <input type="password" id="password" class="form-control" name="password" placeholder="Enter your password" required>
+            <label for="password" class="form-label">Password</label>
             <div class="valid-feedback">Looks Good!</div>
             <div class="invalid-feedback">Please enter a valid password.</div>
         </div>
 
         <div class="row justify-content-center text-center">
-            <button type="submit" class="col-3 btn btn-primary user-form-btn">Sign-Up</button>
+            <button type="submit" class="col-4 col-sm-3 btn btn-primary user-form-btn">Sign-Up</button>
         </div>
 
     </form>

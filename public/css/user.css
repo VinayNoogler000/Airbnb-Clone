@@ -1,0 +1,51 @@
+/* STYLING FOR LOGIN & SIGNUP PAGE */
+
+.login-page, .signup-page {
+    min-height: 0;
+}
+
+.login-page main, .signup-page main {
+    margin-top: 5rem;
+}
+
+/* User Form Styles */
+.user-form {
+    width: 25rem !important
+}
+
+.signup-page .field-containers input:focus ~ label {
+    top: -18%;
+}
+
+.signup-page .field-containers input:not(:placeholder-shown) ~ label {
+    top: -10%;
+}
+
+@media (max-width: 768px) {
+    .user-form {
+        width: 22.5rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .user-form {
+        width: 20rem !important;
+    }
+}
+
+.user-form-btn {
+    border: 0 !important;
+    background-color: #fe424d !important;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.user-form-btn:hover {
+    background-color: #e33a45 !important;
+}
+
+/* Footer Styles */
+.login-page footer, .signup-page footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

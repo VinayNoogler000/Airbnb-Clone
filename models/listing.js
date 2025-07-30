@@ -1,7 +1,6 @@
 // This file defines the Mongoose schema and model for a listing in a marketplace application.
 const mongoose = require('mongoose');
 const Review = require('./review');
-const cookieParser = require('cookie-parser');
 
 // Define the schema for a listing
 const listingSchema = new mongoose.Schema({
