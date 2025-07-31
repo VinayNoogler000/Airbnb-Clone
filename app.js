@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -21,9 +22,21 @@ const usersRouter = require("./routes/user.js");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-// define SESSION's OPTIONS wiht COOKIES:
+// Defining MONGO SESSION STORE for Passing it in the Options of Express-Session:
+const store = MongoStore.create({
+    mongoUrl: process.env.ATLASDB_URL,
+    crypto: {
+        secret: process.env.SESSION_SECRET
+    },
+    touchAfter: 60 * 60 * 24 // Session will get automatically updated 24 Hours After there are no updates/changes in the session. 
+});
+
+store.on("error", () => console.log("ERROR in MONGO-SESSION STORE", err));
+
+// define EXPRESS-SESSION's OPTIONS with COOKIES:
 const sessionOptions = {
-    secret: "my-super-secret-code",
+    store: store,
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
