@@ -1,10 +1,11 @@
+require("dotenv").config();
 const mongoose = require('mongoose');
 const Listing = require("../models/listing");
 const initData = require("./data");
 const getGeoCoordinates = require("../utils/getGeoCoordinates");
 
 const main = async () => {
-    await mongoose.connect("mongodb://127.0.0.1:27017/wonderlust");
+    await mongoose.connect(process.env.ATLASDB_URL);
 }
 
 const initDB = async () => {
