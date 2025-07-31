@@ -35,7 +35,7 @@ const sessionOptions = {
 
 // ASYNC FUNCTION to CONNECT with MongoDB:
 const main = async () => {
-    await mongoose.connect("mongodb://127.0.0.1:27017/wonderlust");
+    await mongoose.connect(process.env.ATLASDB_URL);
 }
 
 // ESTABLISH CONNECTION with MONGODB:
