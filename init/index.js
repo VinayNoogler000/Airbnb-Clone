@@ -15,7 +15,7 @@ const initDB = async () => {
     for(let listing of initData.listings) {
         let geometry = await getGeoCoordinates(listing.location, listing.country);
         listing.geometry = geometry;
-        listing.owner = "68760116b29e09a8e43edb34";
+        listing.owner = "688b941377084855dfa662cd";
     }
 
     await Listing.insertMany(initData.listings);
