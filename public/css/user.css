@@ -1,9 +1,4 @@
 /* STYLING FOR LOGIN & SIGNUP PAGE */
-
-.login-page, .signup-page {
-    min-height: 0;
-}
-
 .login-page main, .signup-page main {
     margin-top: 5rem;
 }
@@ -41,11 +36,4 @@
 
 .user-form-btn:hover {
     background-color: #e33a45 !important;
-}
-
-/* Footer Styles */
-.login-page footer, .signup-page footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
 }
