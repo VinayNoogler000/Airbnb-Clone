@@ -1,27 +1,216 @@
-# Airbnb Clone - My First Full-Stack Web Development Project
+# RentEase - Property Rental Platform for Modern Travelers
 
-## Preview
-![Airbnb-Clone-by-VT-Preview](https://github.com/VinayNoogler000/Airbnb-Clone/blob/main/public/preview.png?raw=true)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/VinayNoogler000/RentEase/blob/main/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/VinayNoogler000/RentEase)](https://github.com/VinayNoogler000/RentEase/issues)
+[![GitHub stars](https://img.shields.io/github/stars/VinayNoogler000/RentEase)](https://github.com/VinayNoogler000/RentEase/stargazers)
 
-## Learnings
-1. **Middelwares**: In Express app, the functions which get executed after the servers receives client requests, and before sending a response to the client are called middlewares. To define functions as middlewares, we need to pass them inside `app.use()` method, whose 1st arg is the path of the website, to which the client sends request to, and 2nd arg is the function/middleware itself, which takes 3 args `(req, res, next)`, where we know about `res`, & `req` objects, which stores information and allows us to perform ops. on client's request and server's response, whereas, the `next` object, is a function, which we need to execute at the end of the middleware to handle the control to the next middleware or route-handler, and calling this `next()` is only ommitable, if the middleware directly sends the response to the client's request.
-2. **Authentication & Authorization**: Authentication is the process of the knowing "who is the user?" (identication), whereas Authorization is the process of knowing "what actions the user is allowed to do?" (verification). For eg: sign-up/login pages of a website are for the user identification (authentication), whereas, in websites like YouTube, uploding videos on your channel, commenting, liking comments, editing comments, etc. are the actions which the users are allowed to do (authorization).
-3. **Encoding V/S Encrypting**: While both transform data, encoding (eg., Base64, URL encoding) changes data format for compatibility and usability, and is easily reversible, whereas, Encryption (eg., HTTPS, AES) secures data by making it unreadable without a secret key, protecting confidentiality.
-4. **Passport.js**: An authentication middleware for Express-based web apps, which is extremely flexible and modular, and also has a comprehensive set of strategies (authentication methods) for authentication, like local (username and password), Google, Facebook, Twitter, and more.
-5. **Top 10 Authentication Methods/Strategies**: For user authentication, commonly used strategies in web applications include Username/Password, Social Logins (OAuth/OpenID Connect), JSON Web Tokens (JWT), Multi-Factor Authentication (MFA), Passwordless (Magic Links/OTPs), Single Sign-On (SSO), API Keys, Biometrics, Certificate-Based, and HTTP Basic/Digest (though the latter is less recommended for new web apps). I plan to integrate few of these using the `Passport.js` NPM package.
-6. **Top 5 Social Media Platforms for Authentication**: To provide convenient social login options, the most widely adopted platforms for user authentication are Google, Facebook, Apple, LinkedIn, and GitHub/Microsoft.
-7. **Passport-local**: It's a Passport.js strategy for authenticating users based on their username and password, in the Express web app. Download and install as an NPM package.
-8. **Passport-local-mongoose**: It's a Mongoose Plugin that simplifies user authentication in an Express web app, usingwith `Passport.js` local strategy. Also avaiable as an NPM package. It will automatically add a username, hash and salt field to store the username, the hashed password and the salt value, to the `User` model, irrespective of the whether we've define those properties of the `User` model or not. Additionally, it also adds some methods to the `User` model.
-9. **Session**: A web applilcation needs the ability to identify the users as the browse from page to page. The series of request-response cycles associate with a single user, is called a session. By-default, the session starts when the user gets access to the website, and ends when the user closes the browser. But the expiry of the session can be changed by settin the `maxAge` option of the session.
-10. **Handling User-Authentication Requests**: To handle seamlessly, I used `passport.authenticate()` function as a middleware, which, generally, takes two options `failureRedirect` and `failureFlash`, where `failureRedirect` is used to specify the path at which the client will be redirected to upon failed authentication, whereas, `failureFlash` when set to `true`, it displays a flash message (as an alert/error pop-up) on the webpage, displaying the reason of failed authentication.
-11. **Checking the Status of Authentication**: To know whether the user is authenticated or not `req.isAuthenticated()` method is used, which returns `true`, if the user is authenticated, else `false`. And, this gets updated, when the `req.user` property (obj) gets updated with the user's credentials (without password).
-12. **Automatic Login on Successful SignUp**: To make the user automatically login the website, upon successfuly sign-up, then we use `req.login()` method, which is added/exposed my `Passport.js` middelware, which takes the registered user and a callback (with `err` parameter), as arguments. The callback (2nd arg) of the `req.login()` allows us to define the operations to be performed upon successful login or failure. Also, `passport.authenticate()` for `/login` path, also uses `req.login()` to add user credentials to session.
-13. **Authorization**: Created a `isAuthorized()` middleware function to check that if the current user is authorized (owner/author) to modify the listing/review, by assigning their owner and author to each listing and review, respectively, then using the `currUser` information, which is stored by the `passport.js` after authentication, in the `req.user` object, to check whether he/she is the actual owner/author of the listing/review or not, respectively, if yes, then only they can modify the resource, else not.
-14. **MVC Architecture**: MVC stands for Model-View-Controller. It's a design patern —a way to right code— followed in industry for maximizing code readability, and maintainability. In MVC:
-   - 'Model' refers to a folder in the server directory which stores DB Models (or Collections), which allows us to perform CRUD Ops. in DBs
-   - 'View' refers to a folder containing templates (or dynamic HTML docs) to be rendered and sent to the client (or browser), and
-   - 'Controller' refers to a folder containing route-handlers or API functions/callbacks to be executed when the server (Express web app) receives HTTP client-request on a particular path of a website of a particular HTTP-Method, to get access to a resource or to perform CRUD Ops.  
-15. **Router.route() method**: It helps us to avoid the redundancy of writing the route/path (to which client sends requests to) multipe times, for each and every type of HTTP-requests and route-handlers, by allowing us to write the route/path only once, and group all the route-handlers for the same path, below it, increasing the code readability and maintainability, also avoiding writing incorrect path.
-16. **Starability.css**: It's a CSS library of pre-defined rating stars with animations, which we can directly use (copy/paste) in our webapp to display rating stars for enhnaced UI/UX.
-17. **Cloudinary for Image Storage & Delivery**: Integrated [Cloudinary](https://console.cloudinary.com/app) to store images and deliver them to the client, by first making the frontend capable to send files/images to the backend by setting the `<form enctype="multipart/form-data">`, then parsing the files in the backend by using `multer.js` middleware, then uploading the image to the Cloudinary storage by using `cloudinary` and `multer-cloudinary-storage` NPM packages, then the image URL received by the Cloudinary is added to the database, which upon client-requests sent and rendered on the client-side.
-18. **MapBox & Geocoding API**: Integrated MapBox to display interactive maps on the listing pages. Used the MapBox Geocoding API to convert the location addresses of listings into geographic coordinates (latitude and longitude), which are then stored in the database. This allows for accurately plotting the listings on the map, enhancing the user's ability to visualize property locations.  
+<!-- Frontend -->
+[![EJS](https://img.shields.io/badge/ejs-%23B6CC6A.svg?style=for-the-badge&logo=ejs&logoColor=brown)](https://ejs.co/)
+[![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+<!-- [![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://reactjs.org/) -->
+
+<!-- Backend -->
+[![Node.js](https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)](https://expressjs.com/)
+[![Passport](https://img.shields.io/badge/passport-%23000000.svg?style=for-the-badge&logo=passport&logoColor=white)](http://www.passportjs.org/)
+[![Multer](https://img.shields.io/badge/multer-%23008080.svg?style=for-the-badge&logo=multer&logoColor=white)](https://www.npmjs.com/package/multer)
+
+<!-- Third-Party APIs/Services -->
+[![Cloudinary](https://img.shields.io/badge/Cloudinary-%231563FF.svg?style=for-the-badge&logo=cloudinary&logoColor=white)](https://cloudinary.com/)
+[![MapBox](https://img.shields.io/badge/mapbox-%23000000.svg?style=for-the-badge&logo=mapbox&logoColor=white)](https://www.mapbox.com/)
+
+<!-- Database -->
+[![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+
+## 📖 Overview
+
+RentEase is a full-stack property rental platform that enables users to list, browse, and book (planned) properties worldwide. Built with the MERN stack and enhanced with features like secure authentication, interactive maps, and cloud-based image management, it provides a seamless experience for both property owners and travelers.
+
+## 🎥 Demo
+
+![RentEase-Preview](https://github.com/VinayNoogler000/RentEase/blob/main/public/preview.png?raw=true)
+
+## 🛠 Technologies Used
+
+### Frontend
+- **EJS**: Template engine for server-side rendering
+- **Bootstrap**: Frontend framework for responsive design
+- **React.js**: Frontend library for building the user interface (planned)
+
+### Backend
+- **Node.js**: JavaScript runtime for server-side development
+- **Express.js**: Web application framework for building the server and API endpoints
+- **Passport.js**: Authentication middleware for user management
+- **Express-Session**: Session middleware for Express.js
+- **Method-Override**: Middleware for HTTP method override
+- **Multer**: Middleware for handling multipart/form-data
+
+### Third-Party APIs/Services
+- **Cloudinary**: Cloud service for image storage and delivery
+- **Mapbox**: Location services and interactive maps
+
+### Database
+- **MongoDB**: NoSQL database for storing property listings, user data, and reviews
+- **Mongoose**: MongoDB object modeling tool
+
+## 📚 Learnings
+
+1. **Middlewares**: In Express app, functions executed between receiving client requests and sending responses. They handle request processing, authentication, and error handling through the `app.use()` method.
+
+2. **Authentication & Authorization**: Implemented user authentication (identity verification) and authorization (permission management) using `Passport.js` strategies.
+
+3. **Session Management**: Implemented session-based authentication using `Express-Session` for maintaining user state across requests.
+
+4. **MVC Architecture**: Organized code following the Model-View-Controller pattern:
+   - Models: Database schemas and business logic
+   - Views: EJS templates for rendering
+   - Controllers: Handle HTTP-Client-requests and sending server-responses
+
+5. **Cloud Integration**: 
+   - Implemented Cloudinary for image storage and processing
+   - Integrated Mapbox for location services and interactive mapping
+   - Utilized geocoding for property location visualization
+
+6. **Security Best Practices**:
+   - Implemented secure password hashing
+   - Protected routes with authentication middleware
+   - Handled user sessions securely
+
+7. **Database Operations**:
+   - CRUD operations with MongoDB
+   - Data relationships and references
+   - Query optimization and indexing
+
+8. **Error Handling**:
+   - Implemented global error handlers
+   - Async/await error management
+   - User-friendly error messages
+
+## 📝 To-Do
+
+- [✅] Enhance search with filters
+- [✅] Add user reviews and ratings
+- [ - ] Implement social authentication (Google, Facebook)
+- [ - ] Add payment gateway integration
+- [ - ] Add real-time messaging
+- [ - ] Implement booking system
+- [ - ] Optimize performance
+- [ - ] Add email notifications
+
+## 💬 Seeking Feedback & Improvements
+
+I would love to hear your feedback on this project! If you have suggestions for performance improvements or ideas for new features, please feel free to open an issue on the [GitHub repository](https://github.com/VinayNoogler000/Instagram-Clone/issues).
+
+## 🐛 Found a Bug? Have a Feature Suggestion?
+
+If you find a bug or have a feature suggestion, please open an issue [here](https://github.com/VinayNoogler000/Instagram-Clone/issues) with a clear description and steps to reproduce. Your input means a lot to me, as it helps me grow and become a more powerful software developer engineer.
+
+## 📋 Prerequisites for Local Development
+
+- Node.js (Latest LTS Version)
+- MongoDB
+- NPM
+- Git
+- Basic knowledge of JavaScript and Web Development
+
+## ⚙️ Setup Locally
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/VinayNoogler000/RentEase.git
+   ```
+
+2. Install dependencies:
+   ```bash
+   cd RentEase
+   npm install --force
+   ```
+
+3. Configure environment variables by creating a `.env` file in the root directory with following variables:
+   ```bash
+   # Server Configuration
+   PORT=8080
+   NODE_ENV=development
+
+   # Session Configuration
+   SESSION_SECRET=your_session_secret_key
+
+   # Cloudinary Configuration
+   CLOUD_NAME=your_cloudinary_cloud_name
+   CLOUD_API_KEY=your_cloudinary_api_key
+   CLOUD_API_SECRET=your_cloudinary_api_secret
+
+   # Mapbox Configuration
+   MAP_TOKEN=your_mapbox_api_token
+
+   # MongoDB Configuration
+   ATLASDB_URL=your_mongodb_connection_string
+   ```
+   You'll need to:
+      * Create a MongoDB Atlas account and get your database connection string
+      * Set up a Cloudinary account for image storage
+      * Get a Mapbox API token for maps and geocoding
+      * Generate a random session secret key 
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+## 📁 Project Structure
+
+```
+rentease/
+├── controllers/    # Route controllers
+├── middleware/     # Custom middlewares
+├── models/         # Database models
+├── public/         # Static files (CSS & JS)
+├── routes/         # Express routes
+├── utils/          # Utility functions
+├── views/          # EJS templates
+├── app.js          # Application entry point
+├── cloudConfig.js  # Cloudinary configuration file
+└── schema.js       # JOI schema for server-side validation
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 🗓️ What My Daily Life Looks Like?
+
+As of now, the latest version of this README file, I've started the revison of `React.js`, will be building atleast 3-5 major Projects using this framework with other modern tech to strengthen my fundamentals, and, finally, become a MERN-Stack Web Developer.
+
+This project/website is my 1st self-made Full-Stack Web Development project, which I'm really proud of, and the idea plus prototype of this project was given by my mentor, [Ms. Shradha Khapra](https://www.linkedin.com/in/shradhakhapra/).
+
+My end-goal in this project is to make it a full-fledge software-solution, just like AirBnb, allowing me to learn a lot about modern-development practices and building software-solutions, which will be used by people to rent properties worldwide, and I will be using this project as a portfolio piece to showcase my skills to potential employers. 
+
+After building a few `React.js` projects, I will be continuing to work in this `RentEase` project or some other passion projects, where I'll be building at least 2 or more real-world Full-Stack (MERN) projects to hone my skills, and secure a Full-Stack Web Developer job.
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/VinayNoogler000/RentEase/blob/main/LICENSE.txt) file for details.
+
+## 📞 Contact
+
+**Vinay Tambey**
+- LinkedIn: [Vinay Tambey](https://www.linkedin.com/in/vinaytambey)
+- Email: [vinaytambey000@gmail.com](mailto:vinaytambey000@gmail.com)
+- Twitter/X: [@VinayNoogler000](https://x.com/VinayNoogler000)
+- GitHub: [@VinayNoogler000](https://github.com/VinayNoogler000)
+
+## 📊 Project Status
+
+Active development - Features being added regularly.
+
+## 💼 Support
+
+Give a ⭐️ if this project helped you!
+
+---
+
+Made with ❤️ by [Vinay Tambey](https://github.com/VinayNoogler000)
