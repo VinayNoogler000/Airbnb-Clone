@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { isLoggedIn, isAuthorized, validateModel } = require("../utils/middlewares.js");
+const isLoggedIn = require("../middleware/isLoggedin.js");
+const isAuthorized = require("../middleware/isAuthorized.js");
+const validateModel = require("../middleware/validateModel.js");
 const { listingSchema } = require("../schema.js");
 const wrapAsync = require("../utils/wrapAsync");
 const { index, viewListing, filterListing, searchListing, addSampleListing, renderAddForm,  addListing, renderEditForm, updateListing, deleteListing } = require("../controllers/listing.js");
