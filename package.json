@@ -7,7 +7,7 @@
   "description": "RentEase is a modern property rental platform built with the MERN stack. It features secure user authentication, dynamic property listings, real-time map integration via Mapbox, cloud image management through Cloudinary, and an intuitive review system. Perfect for property owners and renters seeking a seamless rental experience.",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "dev": "nodemon app.js"
   },
   "keywords": [
     "html",
