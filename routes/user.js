@@ -1,7 +1,5 @@
 const router = require("express").Router();
-const isLoggedIn = require("../middleware/isLoggedin.js");
-const saveRedirectUrl = require("../middleware/saveRedirectUrl.js");
-const validateModel = require("../middleware/validateModel.js");
+const { isLoggedIn, saveRedirectUrl, validateModel } = require("../middlewares/index.js");
 const passport = require("passport");
 const { userSchema } = require("../schema.js");
 const { renderSignupForm, registerUser, renderLoginForm, loginUser, logoutUser } = require("../controllers/user.js");
